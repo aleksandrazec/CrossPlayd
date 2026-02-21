@@ -35,4 +35,5 @@ The application with its core functionalities is expected to be delivered by end
 This project charter formally authorizes this project based on the information outlined above. Should any of the information change throughout the duration of the project, it shall be discussed between the project management team and documented appropriately.
 
 Approved by: Aleksandra Zec, Matej Kunovski, Nikola Severov, Andrej Kaziovski
+
 Approval Date: February 2026
