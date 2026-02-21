@@ -12,6 +12,7 @@
 | 89231086   | Matej      | Kunovski  |
 | 89231138   | Nikola     | Severov   |
 | 89231037   | Andrej     | Kaziovski |
+
 All members take on the project manager role, as well as the project client role.
 ### Links to project
 
