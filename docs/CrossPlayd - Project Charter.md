@@ -48,6 +48,7 @@ Demographic:
 - Marital Status: Single
 - Income: €28,332 annually
 - Occupation: Big Bang retail worker
+
 Goals:
 - Save up money so he can move out to his own apartment.
 - Earn a raise and move up in the company.
@@ -79,6 +80,7 @@ Demographic:
 - Marital status: Single
 - Income: $140,000 annually
 - Occupation: Youtuber
+
 Goals:
 - Reach 2 million subscribers on YouTube.
 - Move to Los Angeles.
@@ -113,6 +115,7 @@ Demographic:
 - Marital Status: Married
 - Income: $92,000 annually
 - Occupation: Public Defendant
+
 Goals:
 - She wants to spend more time with her family, especially her children.
 - She wants to try out new things and hobbies even though they might not work out.
