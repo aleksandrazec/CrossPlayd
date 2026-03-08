@@ -26,8 +26,14 @@ The purpose of the application *CrossPlayd* is to allow users to track and revie
 - Users can view a homepage which contains multiple tabs that display different video game categories, like trending, best rated, etc.
 - Users can log video games they've played in their library and are able to rate them from 1 to 10. 
 - They can categorize the games by marking them with *100 Percented*, *Completed*, *Playing*, *Paused*, *Dropped* and *Plan To Play*.
+- Users can pin their favorite games on their profile.
+- Users can leave comments on other users' accounts.
+- Users can follow other users. In the case both follow each other, they have the status friends.
+- Users can look through their following or friends' recent activities by checking the appropriate tab.
+- Users can go to the forum page, where they can open new forums or comment on other users' forums.
 - Users can inform themselves on video games they're interested in by reading the game description, reading the reviews made by other users and the global rating of the game. 
-- Users can interact with other users' reviews by replying to them.
+- Users can interact with other users' reviews by liking and replying to them.
+- Users can check out related games of the games' page they are currently on.
 ## Budget estimate
 This is an independent project developed by a small passionate group of developers, and therefore does not necessitate a budget. Note that the budget for the project will not be finalized until the project planning has been completed.
 ## Delivery deadline
@@ -68,6 +74,13 @@ Goals:
 | Can't keep track of which games he wants to play and where they are available on | Uses a note application to keep track of them or makes multiple wishlists on different platforms | Keep track of all the games you want to play in the same place |
 | Wants to be updated on what games his friend has finished                        | Ask his friend when he has the chance                                                            | He can visit his friend's profile and check his new updates    |
 | Wants to show off his gaming collection and all the games he finished            | He shows off to his friends while playing with them                                              | He can make a profile and log his gaming collection easily     |
+#### User Stories 
+
+| User Story                                                                                                         | Test Cases                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| As a Hardcore Gamer, I want to log my video games in my library so that I can keep track of my collection.         | - Make sure that you can add video games into your library.<br> - Make sure that games can be sorted by different categories your library.                                                                     |
+| As a Hardcore Gamer, I want to be able to see what my friends are playing so that I can keep up with them.         | - Make sure that if two accounts follow each other they are classified as friends. <br> - Make sure that you can see libraries of other accounts.<br> - Make sure that there is a tab to view friend activity. |
+| As a Hardcore Gamer, I want to express myself and my interests so that I can show off my collection to my friends. | - Make sure that you can set a favorite game to show up on your account.<br> - Make sure that you can change your profile details.                                                                             |
 ### Ellie Baker - The Gaming Youtuber
 #### Screening question
 How many gameplay videos have you made for your social media platform?
@@ -102,6 +115,14 @@ Goals:
 | Ellie wants a way to connect further to her audience, outside of her videos.                                   | She sometimes posts blogs or pictures of what she's doing in her free time.          | Having a place to post her personal reviews and thoughts of the games she's played both on and off camera, would allow her audience to feel closer to her, and could discuss the topics of the game. |
 | Ellie needs a way to see what games are currently trending, to know what she should play next for her channel. | She looks at what other gaming influencers are posting or looks up new games online. | Having a place to see what the community is currently reviewing and commenting on would allow her to stay ahead of the curve.                                                                        |
 
+#### User stories
+
+| User story                                                                                                           | Test cases                                                                                                                                                                                                 |
+| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| As a gaming youtuber, I want to deepen my relationship with my fans, so that I can strengthen my online persona.     | - Make sure that people can find and follow others by a username.<br>- Make sure that people can like and reply to others reviews.<br>- Make sure that there is a tab of most popular reviewers currently. |
+| As a gaming youtuber, I want to know which games are currently popular, to ensure my content is relevant.            | - Make sure that there is a tab of most reviewed games currently.<br>- Make sure that there is a tab of highest reviewed games currently.                                                                  |
+| As a gaming youtuber, I want to keep track of my gaming habits, to ensure I don't forget to film specific gameplays. | - Make sure that the game library includes games across different platforms. <br>- Make sure that the games in the library can be categorized with different labels.                                       |
+
 ### Jane Garret - Lover of retro and arcade games
 
 #### Screening Question
@@ -134,6 +155,14 @@ Goals:
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
 | She wants to write down the games all the games she played as a kid. | She can physically write them in a notebook or sending them in a message to her children in a group chat. This is tedious and impractical. | Having a platform where she can track her played games and that being easily viewable would solve her issue.                 |
 | She wants to see what games are her kids into.                       | She can walk into their room and look through their gaming collection or she can ask them.                                                 | If there was a platform where she can follow her kids and can track what games they've played, that would solve her problems |
+
+#### User stories
+
+| User story                                                                                                                                                                                                                                | Test cases                                                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| As a mother of two children, I would like to spend more time with my family and do some fun activities together. I would like to try and find a couple of party games for the whole family that keeps everyone engaged and is interested. | - Make sure that the platform provides search options by genre and user preference.<br>- Make sure that the platform gives the most popular options when searching.                                                                   |
+| As a former retro gamer, I would like to replay some of my favourite games from the past and see if my beloved game series have some new additions to try out.                                                                            | - Make sure that the platform provides a wide catalogue of games from past and present.<br>- Make sure that the platform is up to date with the newest sequels or other games linked to a game series (Example: Final fantasy series) |
+| As a former gamer that wants to rekindle my spark for video games again, I would like to be able to see opinions and reviews of my fellow gamer buddies.                                                                                  | - Make sure that the platform provides a review system.<br>- Make sure that the review system lets you reply and like reviews/comments provided by the users.                                                                         |
 
 ## Approval
 This project charter formally authorizes this project based on the information outlined above. Should any of the information change throughout the duration of the project, it shall be discussed between the project management team and documented appropriately.
