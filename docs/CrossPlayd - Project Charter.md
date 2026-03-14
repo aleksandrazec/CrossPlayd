@@ -17,9 +17,10 @@
 All members take on the project manager role, as well as the project client role.
 ### Links to project
 
-| Platform | Link                                        |
-| -------- | ------------------------------------------- |
-| GitHub   | https://github.com/aleksandrazec/CrossPlayd |
+| Platform | Link                                                                                                                                                                                   |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GitHub   | https://github.com/aleksandrazec/CrossPlayd                                                                                                                                            |
+| Figma    | https://www.figma.com/proto/HEsaUyWCWtvlzsnrnOBn5R/CrossPlayd?node-id=15-305&t=GmMJEkHxFzyGk50q-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=8%3A14 |
 ## Project description
 The purpose of the application *CrossPlayd* is to allow users to track and review video games they've played all in one place. Rather than being a replacement for other video game scoring sites, like *MetaCritic* or *Steam Community Page*, this application focuses on creating a user-based community for every game of interest, no matter if the user owns it and independently of the platform they've played it on. This also allows for logging of older or discontinued games, as well as games that are not available on major platforms.
 ### Core functionalities
