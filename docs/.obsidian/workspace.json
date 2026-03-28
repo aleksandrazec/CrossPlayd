@@ -1,0 +1,200 @@
+{
+  "main": {
+    "id": "fbc022729fa540c7",
+    "type": "split",
+    "children": [
+      {
+        "id": "8271783c2954bb0a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "57dddd6e3cd548a0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sprint 0 Information.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Sprint 0 Information"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "28c231b5dfcbc22b",
+    "type": "split",
+    "children": [
+      {
+        "id": "982628f7bc01e9c7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "05e5d3da4633255e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "f8b806d1251efda2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d0a21b581db66c6b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "31c5c4ccef2dd183",
+    "type": "split",
+    "children": [
+      {
+        "id": "61489c4d48d4b47d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "13a8fcffa85bc515",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "CrossPlayd - Project Charter.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for CrossPlayd - Project Charter"
+            }
+          },
+          {
+            "id": "b6ca64f7b030bf93",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "CrossPlayd - Project Charter.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from CrossPlayd - Project Charter"
+            }
+          },
+          {
+            "id": "78c174a116b7b52c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "883861ad64f8c47c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "d0233b969f1cf75d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "CrossPlayd - Project Charter.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of CrossPlayd - Project Charter"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-kanban:Create new board": false
+    }
+  },
+  "active": "57dddd6e3cd548a0",
+  "lastOpenFiles": [
+    "Sprint 1 Burndown chart.md",
+    "Sprint 1.md",
+    "Sprint 0 Information.md",
+    "CrossPlayd - Project Charter.md",
+    "Untitled.md",
+    "Table of contents.base",
+    "Usability Testing Plan.md",
+    "Hypothesis Testing.md",
+    "Untitled.canvas",
+    "2026-03-28.md"
+  ]
+}
