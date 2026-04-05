@@ -8,6 +8,7 @@
 | 89231086   | Matej      | Kunovski  | Developer    |
 | 89231138   | Nikola     | Severov   | Designer     |
 | 89231037   | Andrej     | Kaziovski | Developer    |
+
 All of the team members also take on the Product Owner role.
 ## Technologies 
 ##### Prototype design
