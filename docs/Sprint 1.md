@@ -6,19 +6,6 @@ kanban-plugin: board
 
 ## TO DO
 
-- [ ] Create branching strategy 
-	#simple 
-	@{2026-03-30}
-- [ ] Create React project
-	@{2026-03-31} #simple
-- [ ] Set up database @{2026-03-31}
-	#intermediate
-- [ ] Set up account for API @{2026-04-02}
-	#simple
-- [ ] Create NodeJS & Express back-end @{2026-04-03}
-	#simple
-- [ ] Create basic queries from back-end to API @{2026-04-04}
-	#difficult
 
 
 ## IN PROGRESS
@@ -32,6 +19,19 @@ kanban-plugin: board
 ## DONE
 
 **Complete**
+- [x] Create branching strategy
+	#simple 
+	@{2026-03-30}
+- [x] Create React project
+	@{2026-03-31} #simple
+- [x] Set up database @{2026-03-31}
+	#intermediate
+- [x] Set up account for API @{2026-04-02}
+	#simple
+- [x] Create NodeJS & Express back-end @{2026-04-03}
+	#simple
+- [x] Create basic queries from back-end to API @{2026-04-04}
+	#difficult
 
 
 

@@ -6,7 +6,7 @@ series:
   - title: Estimated effort
     data: [6, 5, 4, 3, 3, 1, 0]
   - title: Actual effort
-    data: [0, 0, 0, 0, 0, 0, 0]
+    data: [6, 6, 6, 2, 2, 1, 0]
 tension: 0.2
 width: 80%
 labelColors: true
