@@ -1,0 +1,37 @@
+.parent {
+    display: flex;
+    justify-content: center; 
+    height: 100vh;
+    min-height: 200px; 
+  }
+
+  
+  .child > div {
+    margin-bottom: 1%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+h1{
+    text-align: center;
+}
+
+.image{
+    width: 40%;
+}
+.image-container{
+    display: flex;
+    justify-content: center; 
+}
+.header{
+    padding-left: 40%;
+    padding-right: 40%;
+}
+button{
+    background-color: black;
+}
+.button-container{
+    display: flex;
+    justify-content: center; 
+
+}

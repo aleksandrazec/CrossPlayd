@@ -1,0 +1,141 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.tab-navigator {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+.tab-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 0 10px;
+}
+
+.tab-item {
+    padding: 10px 15px;
+    transition: background 0.3s ease;
+}
+
+.tab-item a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.tab-item:hover {
+    background-color: #8D99AE;
+    border-radius: 4px;
+}
+
+.tab-item:last-child {
+    margin-left: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #8D99AE;
+    color: white
+}
+
+button {
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 600;
+    padding: 1%;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}
+
+button:hover {
+    background-color: #374151;
+}
+
+button:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+    button {
+        padding: .75rem 1.5rem;
+    }
+}
+
+input.comment {
+    padding: 0.1% !important;
+}
+
+.reply {
+    margin-left: 3%;
+}
+
+.reply-button {
+    padding: 0.3%
+}
+
+.subfilter {
+    margin-left: 2%;
+}
+
+input {
+    accent-color: #EF233C;
+    font-size: large;
+}
+
+label {
+    font-size: larger;
+}
+
+.search-bar {
+    padding: 1%;
+    width: 50%;
+}
+
+.buttons-list {
+    margin-top: 0.5%;
+}
+
+.search-button {
+    margin-left: 0.5%;
+}
+
+select,
+datalist {
+    font-size: large;
+}
