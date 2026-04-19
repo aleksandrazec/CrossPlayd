@@ -35,3 +35,10 @@ button{
     justify-content: center; 
 
 }
+.game-tape{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+}
+.game-images{
+    width: 100%;
+}

@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import gamesapi from '../../services/gamesapi'
+import userapi from '../../services/userapi'
+import './styles.css'
 
 function GameCard(props) {
 
     const navigate = useNavigate()
     const [coverImage, setCoverImage] = useState()
-
+    const size='1080p'
     const {
         id,
         cover,
@@ -14,23 +15,22 @@ function GameCard(props) {
         rating,
     } = props
 
-    
-    // useEffect(() => {
-    //     const getCoverImage = async () => {
-    //         try {
-    //             const { data } = await gamesapi.post('/covers/',
-    //                 {body: `fields url; where id=${cover}`},
-    //                 { filter: false, sort: false });
-    //             setCoverImage(data);
-    //             console.log(data)
-    //         } catch (err) {
-    //             console.error(err.response?.data?.error || err.message);
-    //         }
-    //     }
-    //     getCoverImage()
-    // }, [])
 
-    const goToGame=async()=>{
+    useEffect(() => {
+        const getCoverImage = async () => {
+            try {
+                const { data } = await userapi.post('/igdb/cover/',
+                    {coverID: `${cover}`});
+                setCoverImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${data[0].image_id}.jpg`);
+                console.log(data[0].image_id)
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message);
+            }
+        }
+        getCoverImage()
+    }, [cover])
+
+    const goToGame = async () => {
         try {
             navigate(`/gamepage/${id}`)
         } catch (error) {
@@ -44,9 +44,11 @@ function GameCard(props) {
             <div>
                 {
                     coverImage ?
-                    <img src={coverImage} onClick={()=>goToGame()}></img>
-                    :
-                    <p></p>
+                        <div >
+                            <img className='game-images' src={coverImage} onClick={() => goToGame()}></img>
+                        </div>
+                        :
+                        <p></p>
                 }
             </div>
         </div>

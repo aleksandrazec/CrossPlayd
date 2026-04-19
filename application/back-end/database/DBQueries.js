@@ -1,6 +1,5 @@
 import supabase from "../config/supabaseClient.js";
 
-
 export const getUsers = async () => {
     const { data, error } = await supabase.from("User").select("*");
     console.log(data);

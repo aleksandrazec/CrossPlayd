@@ -3,7 +3,7 @@ import { UserContext } from '../../Context'
 import logo from '../../assets/logo.png'
 import './styles.css'
 import { useNavigate } from 'react-router';
-import gamesapi from "../../services/gamesapi";
+import userapi from "../../services/userapi";
 import GameTape from "./GameTape";
 
 function HomePage(props) {
@@ -12,20 +12,18 @@ function HomePage(props) {
 
     const [trendingGames, setTrendingGames] = useState()
     
-    // useEffect(() => {
-    //     const getTrendingGames = async () => {
-    //         try {
-    //             const { data } = await gamesapi.post('/games/',
-    //                 {body:'fields name, rating, cover, release_dates; limit 10; where first_release_date > 1772378089 ; sort aggregated_rating_count desc;'},
-    //                 { filter: false, sort: false });
-    //             setTrendingGames(data);
-    //             console.log(data)
-    //         } catch (err) {
-    //             console.error(err.response?.data?.error || err.message);
-    //         }
-    //     }
-    //     getTrendingGames()
-    // }, [])
+    useEffect(() => {
+        const getTrendingGames = async () => {
+            try {
+                const { data } = await userapi.get('/igdb/games/');
+                setTrendingGames(data);
+                console.log(data)
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message);
+            }
+        }
+        getTrendingGames()
+    }, [])
 
     const goToLogIn = async () => {
         try {

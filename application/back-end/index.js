@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
 import env from "dotenv";
+import session from 'express-session'
+import userRoutes from "./routes/userRoutes.js";
+import games from "./routes/games.js"
 
 env.config();
 const app = express();
-const port = 5001;
-
-import DB from "./database/DBQueries.js";
+const port = 5000;
 
 app.use(express.json());
 
@@ -20,6 +21,7 @@ app.use(session({
    cookie: { secure: false }
   }))
 
+
 app.use(cors({
     origin: "http://localhost:5173",
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
@@ -29,6 +31,8 @@ app.use(cors({
 app.get("/", (req, res) => {
     res.send("API is Running....")
 });
+app.use("/supabase", userRoutes);
+app.use("/igdb", games);
 
 app.listen(process.env.PORT || port, ()=>{
     console.log(`Server is running on port: ${process.env.PORT || port}`)
