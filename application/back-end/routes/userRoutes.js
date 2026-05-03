@@ -4,7 +4,10 @@ import {
   fetchUsers,
   fetchUserById,
   modifyUser,
-  removeUser
+  removeUser,
+  logIn,
+  logOut,
+  session
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -14,6 +17,8 @@ router.get("/users", fetchUsers);
 router.get("/users/:id", fetchUserById);
 router.put("/users/:id", modifyUser);
 router.delete("/users/:id", removeUser);
-
+router.post("/users/login", logIn);
+router.post("/users/logout", logOut);
+router.get("/users/session", session);
 
 export default router;

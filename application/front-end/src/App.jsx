@@ -8,7 +8,7 @@ function App(props) {
 
   const [user, setUser] = useState({
     role: 'Guest',
-    user_id: 0
+    user_id: -1
   });
 
   return (
