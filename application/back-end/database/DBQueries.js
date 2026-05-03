@@ -48,3 +48,52 @@ const { error } = await supabase
   if (error) throw new Error(error.message);
   return { success: true, message: "User deleted successfully" };
 };
+
+export const listForumsASC= async ()=>{
+const { data, error } = await supabase
+    .from("Forum")
+    .select("*")
+    .order('date', { ascending: true })
+  if (error) throw new Error(error.message);
+  return { data };
+};
+
+export const findForum = async (forum_id)=>{
+const {data, error} = await supabase
+    .from("Forum")
+    .select("*")
+    .eq("forum_id", forum_id)
+    .single()
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+export const findForumComments = async (forum_id)=>{
+const {data, error} = await supabase
+    .from("CommentForum")
+    .select("*")
+    .order('date', { ascending: true })
+    .eq("forum_id", forum_id)
+
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+/*
+dataPool.createForum=(prompt, facultyID)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`INSERT INTO Forum (prompt, faculty_id) VALUES (?,?)`, [prompt, facultyID], (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.deleteForum=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`DELETE FROM Forum WHERE id = ?`, id, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}*/
