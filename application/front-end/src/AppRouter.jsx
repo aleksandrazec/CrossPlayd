@@ -6,6 +6,8 @@ import LogIn from './components/profile/LogIn'
 import Register from './components/profile/Register'
 import RegisterSuccessPage from './components/profile/RegisterSuccessPage'
 import Profile from './components/profile/Profile'
+import ForumHome from "./components/forums/ForumHome"
+import ForumPage from "./components/forums/ForumPage"
 
 class AppRouter extends Component {
     render() {
@@ -18,6 +20,8 @@ class AppRouter extends Component {
                         <Route path="register" element={<Register />} />
                         <Route path="registersuccess" element={<RegisterSuccessPage />} />
                         <Route path="profile" element={<Profile />} />
+                        <Route path="/community" element={<ForumHome />}/>
+                        <Route path="/community/:id" element={<ForumPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
