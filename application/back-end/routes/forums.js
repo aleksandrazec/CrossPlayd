@@ -2,7 +2,9 @@ import express from "express";
 import {
     listAllForums,
     FindTheForum,
-    FindComments
+    FindComments,
+    CreateNewForum,
+    DeleteForum
 } from "../controllers/forumController.js";
 
 const router = express.Router();
@@ -10,5 +12,7 @@ const router = express.Router();
 router.get("/allforums", listAllForums);
 router.get("/forums/:id", FindTheForum);
 router.get("/forums/comments/:id", FindComments);
+router.post("/forum/add", CreateNewForum);
+router.delete("/forum/delete", DeleteForum);
 
 export default router;

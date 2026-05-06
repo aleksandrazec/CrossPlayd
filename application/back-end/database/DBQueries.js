@@ -79,21 +79,22 @@ const {data, error} = await supabase
   return { data };
 }
 
-/*
-dataPool.createForum=(prompt, facultyID)=>{
-  return new Promise((resolve, reject)=>{
-    conn.query(`INSERT INTO Forum (prompt, faculty_id) VALUES (?,?)`, [prompt, facultyID], (err,res)=>{
-      if(err){return reject(err)}
-      return resolve(res)
-    })
-  })
+
+export const createForum = async(forum_data)=>{
+  const {data, error} = await supabase
+    .from("Forum")
+    .insert([forum_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
 }
 
-dataPool.deleteForum=(id)=>{
-  return new Promise((resolve, reject)=>{
-    conn.query(`DELETE FROM Forum WHERE id = ?`, id, (err,res)=>{
-      if(err){return reject(err)}
-      return resolve(res)
-    })
-  })
-}*/
+
+export const deleteForum = async (forum_id)=>{
+  const {data, error} = await supabase
+    .from("Forum")
+    .delete()
+    .select('forum_id', forum_id)
+  if (error) throw new Error(error.message);
+  return { data };
+}
