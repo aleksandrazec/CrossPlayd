@@ -1,4 +1,3 @@
-import { log } from "node:console";
 import { 
     listForumsASC,
     findForum,
@@ -34,10 +33,6 @@ export const FindComments = async (req, res) => {
     try{
       const { id } = req.params;
       const comments = await findForumComments(id);
-      if (!comments) {
-        return res.status(404).json({ error: "Comments not found" });
-      }
-      log(comments)
       res.status(200).json(comments);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -46,8 +41,8 @@ export const FindComments = async (req, res) => {
 
 export const CreateNewForum = async (req, res) => {
     try{
-      const {forum_data} = req.body;
-      const newForum = await createForum(forum_data);
+      const forum_data = req.body;
+      const newForum = await createForum(forum_data.form);
       res.status(201).json(newForum);
     } catch(error) {
       res.status(500).json({ error: error.message });
