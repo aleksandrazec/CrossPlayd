@@ -49,6 +49,16 @@ const { error } = await supabase
   return { success: true, message: "User deleted successfully" };
 };
 
+export const getUserByUsername = async (username) => {
+    const { data, error } = await supabase
+      .from("User")
+      .select("*")
+      .eq("username", username)
+      .single();
+    console.log(data);
+    if (error) throw new Error(error.message);
+    return data;
+};
 export const listForumsASC= async ()=>{
 const { data, error } = await supabase
     .from("Forum")

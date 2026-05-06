@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const UserContext = createContext({role: 'Guest', user_id: 0})
+export const UserContext = createContext({role: 'Guest', user_id: -1})
