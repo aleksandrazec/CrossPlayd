@@ -13,6 +13,6 @@ router.get("/allforums", listAllForums);
 router.get("/forums/:id", FindTheForum);
 router.get("/forums/comments/:id", FindComments);
 router.post("/forum/add", CreateNewForum);
-router.delete("/forum/delete", DeleteForum);
+router.delete("/forum/delete/:id", DeleteForum);
 
 export default router;
