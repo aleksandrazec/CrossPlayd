@@ -2,7 +2,9 @@ import { log } from "node:console";
 import { 
     listForumsASC,
     findForum,
-    findForumComments
+    findForumComments,
+    createForum,
+    deleteForum,
   } from "../database/DBQueries.js";
 
 
@@ -37,6 +39,26 @@ export const FindComments = async (req, res) => {
       }
       log(comments)
       res.status(200).json(comments);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+export const CreateNewForum = async (req, res) => {
+    try{
+      const {forum_data} = req.body;
+      const newForum = await createForum(forum_data);
+      res.status(201).json(newForum);
+    } catch(error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+export const DeleteForum = async (req, res) => {
+    try{
+      const { forum_id } = req.params;
+      const result = await deleteForum(forum_id);
+      res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
