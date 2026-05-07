@@ -4,7 +4,8 @@ import {
     findForumComments,
     createForum,
     deleteForum,
-    createComment
+    createComment,
+    getReplies
   } from "../database/DBQueries.js";
 
 
@@ -63,10 +64,21 @@ export const DeleteForum = async (req, res) => {
 export const CreateNewComment = async (req, res) => {
     try{
       const comment_data = req.body;
-      console.log(comment_data)
+      //console.log(comment_data)
       const newcomment = await createComment(comment_data);
       res.status(201).json(newcomment);
     } catch(error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+export const FindReplies = async (req, res) => {
+    try{
+      const { id } = req.params;
+      const replies = await getReplies(id);
+      res.status(200).json(replies);
+      console.log(replies);
+    } catch (error) {
       res.status(500).json({ error: error.message });
     }
 }
