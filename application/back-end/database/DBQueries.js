@@ -48,3 +48,72 @@ const { error } = await supabase
   if (error) throw new Error(error.message);
   return { success: true, message: "User deleted successfully" };
 };
+
+export const getUserByUsername = async (username) => {
+    const { data, error } = await supabase
+      .from("User")
+      .select("*")
+      .eq("username", username)
+      .single();
+    console.log(data);
+    if (error) throw new Error(error.message);
+    return data;
+};
+export const listForumsASC= async ()=>{
+const { data, error } = await supabase
+    .from("Forum")
+    .select("*")
+    .order('date', { ascending: true })
+  if (error) throw new Error(error.message);
+  return { data };
+};
+
+export const findForum = async (forum_id)=>{
+const {data, error} = await supabase
+    .from("Forum")
+    .select("*")
+    .eq("forum_id", forum_id)
+    .single()
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+export const findForumComments = async (forum_id)=>{
+const {data, error} = await supabase
+    .from("CommentForum")
+    .select("*")
+    .order('date', { ascending: true })
+    .eq("forum_id", forum_id)
+
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+
+export const createForum = async(forum_data)=>{
+  const {data, error} = await supabase
+    .from("Forum")
+    .insert([forum_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+
+export const deleteForum = async (forum_id)=>{
+  const {data, error} = await supabase
+    .from("Forum")
+    .delete()
+    .select('forum_id', forum_id)
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+export const createComment = async (comment_data)=>{
+  const {data, error} = await supabase
+    .from("CommentForum")
+    .insert([comment_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
+}

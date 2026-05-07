@@ -4,6 +4,7 @@ import env from "dotenv";
 import session from 'express-session'
 import userRoutes from "./routes/userRoutes.js";
 import games from "./routes/games.js"
+import forums from "./routes/forums.js"
 
 env.config();
 const app = express();
@@ -31,8 +32,10 @@ app.use(cors({
 app.get("/", (req, res) => {
     res.send("API is Running....")
 });
+
 app.use("/supabase", userRoutes);
 app.use("/igdb", games);
+app.use("/community", forums);
 
 app.listen(process.env.PORT || port, ()=>{
     console.log(`Server is running on port: ${process.env.PORT || port}`)
