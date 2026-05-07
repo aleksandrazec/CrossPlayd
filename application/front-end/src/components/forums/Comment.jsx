@@ -10,18 +10,23 @@ function Comment(props) {
         comment_text,
         forum_id,
     } = props
-    
+
     const formattedDate = new Intl.DateTimeFormat("en-GB").format(new Date(date));
     const [username, SetUsername] = useState();
     const user = useContext(UserContext)
     const [replies, setReplies] = useState()
     const [createReply, SetCreateReply] = useState(false)
     const [prompt, setPrompt] = useState('');
-    const [commentText, setCommentText] = useState('');
+    const [commentText, setCommentText] = useState('')
     const [warning, setWarning] = useState('');
+    const [areRepliesHidden, setAreRepliesHidden] = useState(false)
 
-    const buttonHandler = () => {
+    const buttonHandlerAdd = () => {
         SetCreateReply(current => !current)
+    }
+
+    const buttonHandlerHide = () => {
+        setAreRepliesHidden(current => !current)
     }
 
     useEffect(() => {
@@ -29,7 +34,7 @@ function Comment(props) {
             try {
                 userapi.get(`/supabase/users/${user_id}`)
                     .then(result => {
-                        SetUsername(result. data.username)
+                        SetUsername(result.data.username)
                         console.log("User_data " + result.data);
                     })
                     .catch(err => console.error(err))
@@ -59,7 +64,7 @@ function Comment(props) {
 
     const postComment = async () => {
         try {
-            userapi.post(`/community/forum/comment/add/`, { comment_text:`${commentText}`, user_id:`${user.user_id}`, forum_id:`${forum_id}`, reply_id:`${comment_id}` })
+            userapi.post(`/community/forum/comment/add/`, { comment_text: `${commentText}`, user_id: `${user.user_id}`, forum_id: `${forum_id}`, reply_id: `${comment_id}` })
                 .then(result => {
                     try {
                         setPrompt('Succesfully added reply');
@@ -85,9 +90,16 @@ function Comment(props) {
                 user.role != 'User' ?
                     <p>{warning}</p> :
                     <div>
-                        <button onClick={buttonHandler}>+</button>  <br />
+                        <button onClick={buttonHandlerAdd}>Reply</button>  <br />
                         <p>{prompt}</p>
                     </div>
+            }
+            {
+                replies && replies.length > 0 ?
+                <div>
+                    <button onClick={buttonHandlerHide}>Hide Replies</button>  <br />
+                </div> :
+                <p></p>
             }
             {
                 createReply ?
@@ -99,8 +111,8 @@ function Comment(props) {
             }
             <div id='replies'>
                 {
-                    replies ?
-                        replies.map(com => <div className='reply'><Comment key={com.comment_id} comment_id={com.comment_id} forum_id={com.forum_id} comment_text={com.comment_text} date={com.date} user_id={com.user_id}/></div>)
+                    replies && !areRepliesHidden ?
+                        replies.map(com => <div className='reply' key={com.comment_id}><Comment comment_id={com.comment_id} forum_id={com.forum_id} comment_text={com.comment_text} date={com.date} user_id={com.user_id} /></div>)
                         :
                         <></>
                 }
