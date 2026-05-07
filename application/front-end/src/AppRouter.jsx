@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import App from './App';
 import HomePage from './components/home-page/HomePage'
+import GamePage from './components/game-page/GamePage';
 
 class AppRouter extends Component {
     render() {
@@ -10,6 +11,7 @@ class AppRouter extends Component {
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index={true} element={<HomePage/>}/>
+                         <Route path='/gamepage/:id' element={<GamePage/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>
