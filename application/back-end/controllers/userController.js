@@ -50,7 +50,7 @@ export const logIn = async (req, res) => {
       req.session.logged_in = true;
       req.session.user_id = user.user_id;
       req.session.role = "User";
-      console.log(req.session)
+      //console.log(req.session)
       res.status(200).json({
         role: req.session.role,
         user_id: req.session.user_id

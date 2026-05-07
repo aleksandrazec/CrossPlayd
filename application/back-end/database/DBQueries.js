@@ -63,7 +63,7 @@ export const listForumsASC= async ()=>{
 const { data, error } = await supabase
     .from("Forum")
     .select("*")
-    .order('date', { ascending: true })
+    .order('date', { ascending: false })
   if (error) throw new Error(error.message);
   return { data };
 };
@@ -82,8 +82,9 @@ export const findForumComments = async (forum_id)=>{
 const {data, error} = await supabase
     .from("CommentForum")
     .select("*")
-    .order('date', { ascending: true })
+    .order('date', { ascending: false })
     .eq("forum_id", forum_id)
+    .is("reply_id", null)
 
   if (error) throw new Error(error.message);
   return { data };
@@ -105,6 +106,25 @@ export const deleteForum = async (forum_id)=>{
     .from("Forum")
     .delete()
     .select('forum_id', forum_id)
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+export const createComment = async (comment_data)=>{
+  const {data, error} = await supabase
+    .from("CommentForum")
+    .insert([comment_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
+}
+
+export const getReplies = async (reply_id)=>{
+  const {data, error} = await supabase
+    .from("CommentForum")
+    .select("*")
+    .eq("reply_id", reply_id)
+    .order('date', { ascending: false })
   if (error) throw new Error(error.message);
   return { data };
 }

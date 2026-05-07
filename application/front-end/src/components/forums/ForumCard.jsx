@@ -15,6 +15,7 @@ function ForumCard(props) {
     } = props
 
     const [user, SetUser] = useState();
+    const formattedDate = new Intl.DateTimeFormat("en-GB").format(new Date(date));
 
     const goToForum=async()=>{
         try {
@@ -37,7 +38,7 @@ function ForumCard(props) {
                 console.error(error)
             }
         }
-
+        
         getUser()
     }, [])
 
@@ -47,7 +48,7 @@ function ForumCard(props) {
                 <h2 onClick={()=>goToForum()}>{title}</h2>
             </div>
             <p>{text}</p>
-            <p>Posted on {date} by {user}</p>
+            <p>Posted on {formattedDate} by {user}</p>
         </div>
     )
 

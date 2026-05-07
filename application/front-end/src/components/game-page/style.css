@@ -1,0 +1,41 @@
+.panel {
+    position: relative;
+    z-index: 1;
+}
+
+.game-introText {
+    padding-top: 30%;
+    padding-left: 3%;
+    padding-right: 3%;
+    text-align: left;
+}
+
+h1 {
+    text-align: left;
+}
+
+.genre-tags {
+    font-size: 23px;
+}
+
+.game-cover {
+    padding-top: 23%;
+    padding-left: 5%;
+    padding-right: 3%;
+    float: left;
+    /* height: 300px; */
+    width: 25%;
+}
+
+.game-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62%;
+    z-index: 0;
+}
+
+.background-image {
+  position: relative;
+}

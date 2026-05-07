@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import App from './App';
 import HomePage from './components/home-page/HomePage'
+import GamePage from './components/game-page/GamePage';
 import LogIn from './components/profile/LogIn'
 import Register from './components/profile/Register'
 import RegisterSuccessPage from './components/profile/RegisterSuccessPage'
@@ -18,6 +19,7 @@ class AppRouter extends Component {
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index={true} element={<HomePage/>}/>
+                         <Route path='/gamepage/:id' element={<GamePage/>}/>
                         <Route path="login" element={<LogIn />} />
                         <Route path="register" element={<Register />} />
                         <Route path="registersuccess" element={<RegisterSuccessPage />} />

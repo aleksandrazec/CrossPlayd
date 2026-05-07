@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router'
 import { useState, useEffect, useContext } from 'react'
 import userapi from "../../services/userapi";
 import Comment from "./Comment";
+import { UserContext } from '../../Context';
 
 function ForumPage(props) {
     const { id } = useParams()
@@ -16,8 +17,17 @@ function ForumPage(props) {
     })
 
     const [comments, setComments] = useState()
-    const [user, SetUser] = useState();
-    const [results, SetResults] = useState(false);
+    const [userInfo, SetUserInfo] = useState()
+    const [results, SetResults] = useState(false)
+    const user = useContext(UserContext)
+    const [createComment, SetCreateComment] = useState(false)
+    const [prompt, setPrompt] = useState(' ');
+    const [commentText, setCommentText] = useState('');
+    const [warning, setWarning] = useState('Please log in to post comments');
+    const [formattedDate, SetFormattedDate] = useState('')
+    const buttonHandler = () => {
+        SetCreateComment(current => !current)
+    }
 
     useEffect(() => {
         const getInfo = () => {
@@ -49,7 +59,8 @@ function ForumPage(props) {
 
         getComments();
         getInfo();
-    }, [id])
+        setPrompt('');
+    }, [id, prompt])
 
     useEffect(() => {
         if (results) {
@@ -57,7 +68,7 @@ function ForumPage(props) {
                 try {
                     userapi.get(`/supabase/users/${info.user_id}`)
                         .then(result => {
-                            SetUser(result.data.username)
+                            SetUserInfo(result.data.username)
                             console.log("User_data " + result.data);
                         })
                         .catch(err => console.error(err))
@@ -69,6 +80,30 @@ function ForumPage(props) {
         }
     }, [results])
 
+    useEffect(() => {
+    if (info.date) {
+        SetFormattedDate(new Intl.DateTimeFormat("en-GB").format(new Date(info.date)));
+    }
+    }, [info.date]);
+
+    const postComment = async () => {
+        try {
+            userapi.post(`/community/forum/comment/add/`, { comment_text:`${commentText}`, user_id:`${user.user_id}`, forum_id:`${id}` })
+                .then(result => {
+                    try {
+                        setPrompt('Succesfully added comment');
+                        SetCreateComment(false);
+                    } catch (error) {
+                        console.error(error)
+                    }
+                })
+                .catch(err => setPrompt(`Couldn't add comment`))
+        } catch (error) {
+            console.error(error)
+            setPrompt(`Couldn't add comment`)
+        }
+    }
+
     return (
         <div>
             {
@@ -78,10 +113,28 @@ function ForumPage(props) {
                             <h1>{info.title}</h1>
                         </div>
                         <p>{info.text}</p>
-                        <h5>Posted on {info.date} by User: {user}</h5>
+                        <h5>Posted on {formattedDate} by User: {userInfo}</h5>
                     </div>
                     :
                     <></>
+            }
+
+            {
+                user.role != 'User' ?
+                    <p>{warning}</p> :
+                    <div>
+                        <button onClick={buttonHandler}>Add Comment</button>  <br />
+                        <p>{prompt}</p>
+                    </div>
+                    
+            }
+            {
+                createComment ?
+                    <div>
+                        <textarea id='text' rows="5" cols="80" value={commentText} onChange={(event) => setCommentText(event.target.value)} required></textarea><br />
+                        <button onClick={() => postComment()}>Post</button>
+                    </div>
+                    : <></>
             }
             <div>
                 {

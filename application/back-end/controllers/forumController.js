@@ -1,10 +1,11 @@
-import { log } from "node:console";
 import { 
     listForumsASC,
     findForum,
     findForumComments,
     createForum,
     deleteForum,
+    createComment,
+    getReplies
   } from "../database/DBQueries.js";
 
 
@@ -34,10 +35,6 @@ export const FindComments = async (req, res) => {
     try{
       const { id } = req.params;
       const comments = await findForumComments(id);
-      if (!comments) {
-        return res.status(404).json({ error: "Comments not found" });
-      }
-      log(comments)
       res.status(200).json(comments);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -46,8 +43,8 @@ export const FindComments = async (req, res) => {
 
 export const CreateNewForum = async (req, res) => {
     try{
-      const {forum_data} = req.body;
-      const newForum = await createForum(forum_data);
+      const forum_data = req.body;
+      const newForum = await createForum(forum_data.form);
       res.status(201).json(newForum);
     } catch(error) {
       res.status(500).json({ error: error.message });
@@ -59,6 +56,28 @@ export const DeleteForum = async (req, res) => {
       const { forum_id } = req.params;
       const result = await deleteForum(forum_id);
       res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+export const CreateNewComment = async (req, res) => {
+    try{
+      const comment_data = req.body;
+      //console.log(comment_data)
+      const newcomment = await createComment(comment_data);
+      res.status(201).json(newcomment);
+    } catch(error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+export const FindReplies = async (req, res) => {
+    try{
+      const { id } = req.params;
+      const replies = await getReplies(id);
+      res.status(200).json(replies);
+      console.log(replies);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
