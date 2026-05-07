@@ -25,7 +25,6 @@ function Profile(props) {
                 try {
                     userapi.get(`/supabase/users/${user.user_id}`)
                         .then((result) => {
-                            console.log(result.data);
                             setUserInfo(result.data)
                         })
                         .catch(err => console.error('api error: ', err));

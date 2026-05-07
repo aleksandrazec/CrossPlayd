@@ -108,3 +108,12 @@ export const deleteForum = async (forum_id)=>{
   if (error) throw new Error(error.message);
   return { data };
 }
+
+export const createComment = async (comment_data)=>{
+  const {data, error} = await supabase
+    .from("CommentForum")
+    .insert([comment_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
+}
