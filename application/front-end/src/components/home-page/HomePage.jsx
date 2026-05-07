@@ -24,8 +24,8 @@ function HomePage(props) {
                 <div className="image-container">
                     <img className="image" src={logo} alt='Logo'></img>
                 </div>
-                <div className="header">
-                    <h1>We're not gamers because we don't have lives. It's because we choose to have many...</h1>
+                <div className="header" >
+                    <h1 style={{textAlign: "center"}}>We're not gamers because we don't have lives. It's because we choose to have many...</h1>
                 </div>
                 {
                     user.role != 'User' ?

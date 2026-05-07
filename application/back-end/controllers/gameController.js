@@ -94,7 +94,7 @@ import {
       const similarGameID = req.body.id;
       console.log('similar games '+similarGameID[0]);
       var similarGamesBody = `fields name, rating, cover, release_dates; limit 10; where id=${similarGameID[0]} | id=${similarGameID[1]} | id=${similarGameID[2]} | id=${similarGameID[3]} | id=${similarGameID[4]} | id=${similarGameID[5]} | id=${similarGameID[6]} | id=${similarGameID[7]} | id=${similarGameID[8]} | id=${similarGameID[9]};`
-      const similarGames = await getTrendingGames(similarGamesBody);
+      const similarGames = await getGames(similarGamesBody);
       res.status(200).json(similarGames);
     } catch (error) {
       res.status(500).json({ error: error.message });
