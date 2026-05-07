@@ -42,7 +42,7 @@ button{
 .game-images{
     width: 100%;
 }
-.links th{
+.links tr, td{
     text-align: center;
     background-color: #8D99AE;
 }
