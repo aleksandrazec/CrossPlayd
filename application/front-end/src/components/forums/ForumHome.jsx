@@ -27,7 +27,8 @@ function ForumsHome(props) {
         }
 
         getForums();
-    }, [])
+        setPrompt("")
+    }, [prompt])
 
     const SubmitForum = () => {
         event.preventDefault();
@@ -43,6 +44,7 @@ function ForumsHome(props) {
             .then(result => {
                     try {
                         setPrompt('Succesfully created forum');
+                        setCreateForum(false)
                     } catch (error) {
                         console.error(error)
                     }

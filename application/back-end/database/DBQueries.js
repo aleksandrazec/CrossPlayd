@@ -63,7 +63,7 @@ export const listForumsASC= async ()=>{
 const { data, error } = await supabase
     .from("Forum")
     .select("*")
-    .order('date', { ascending: true })
+    .order('date', { ascending: false })
   if (error) throw new Error(error.message);
   return { data };
 };
@@ -82,7 +82,7 @@ export const findForumComments = async (forum_id)=>{
 const {data, error} = await supabase
     .from("CommentForum")
     .select("*")
-    .order('date', { ascending: true })
+    .order('date', { ascending: false })
     .eq("forum_id", forum_id)
     .is("reply_id", null)
 
@@ -124,7 +124,7 @@ export const getReplies = async (reply_id)=>{
     .from("CommentForum")
     .select("*")
     .eq("reply_id", reply_id)
-    .order('date', { ascending: true })
+    .order('date', { ascending: false })
   if (error) throw new Error(error.message);
   return { data };
 }

@@ -11,9 +11,18 @@ function Comment(props) {
         forum_id,
     } = props
     
+    const formattedDate = new Intl.DateTimeFormat("en-GB").format(new Date(date));
     const [username, SetUsername] = useState();
     const user = useContext(UserContext)
     const [replies, setReplies] = useState()
+    const [createReply, SetCreateReply] = useState(false)
+    const [prompt, setPrompt] = useState('');
+    const [commentText, setCommentText] = useState('');
+    const [warning, setWarning] = useState('');
+
+    const buttonHandler = () => {
+        SetCreateReply(current => !current)
+    }
 
     useEffect(() => {
         const getUser = () => {
@@ -43,18 +52,51 @@ function Comment(props) {
             }
         }
 
-        getReplies();
-
+        getReplies()
         getUser()
-    }, [comment_id])
+        setPrompt('')
+    }, [comment_id, prompt])
+
+    const postComment = async () => {
+        try {
+            userapi.post(`/community/forum/comment/add/`, { comment_text:`${commentText}`, user_id:`${user.user_id}`, forum_id:`${forum_id}`, reply_id:`${comment_id}` })
+                .then(result => {
+                    try {
+                        setPrompt('Succesfully added reply');
+                        SetCreateReply(false);
+                    } catch (error) {
+                        console.error(error)
+                    }
+                })
+                .catch(err => setPrompt(`Couldn't add reply`))
+        } catch (error) {
+            console.error(error)
+            setPrompt(`Couldn't add reply`)
+        }
+    }
 
     return (
         <div>
             <div>
                 <h4>{comment_text}</h4>
-                <p>Posted on {date} by {username}</p>
+                <p>Posted on {formattedDate} by {username}</p>
             </div>
-
+            {
+                user.role != 'User' ?
+                    <p>{warning}</p> :
+                    <div>
+                        <button onClick={buttonHandler}>+</button>  <br />
+                        <p>{prompt}</p>
+                    </div>
+            }
+            {
+                createReply ?
+                    <div>
+                        <textarea id='text' rows="5" cols="80" value={commentText} onChange={(event) => setCommentText(event.target.value)} required></textarea><br />
+                        <button onClick={() => postComment()}>Post</button>
+                    </div>
+                    : <></>
+            }
             <div id='replies'>
                 {
                     replies ?

@@ -21,10 +21,10 @@ function ForumPage(props) {
     const [results, SetResults] = useState(false)
     const user = useContext(UserContext)
     const [createComment, SetCreateComment] = useState(false)
-    const [prompt, setPrompt] = useState('');
+    const [prompt, setPrompt] = useState(' ');
     const [commentText, setCommentText] = useState('');
     const [warning, setWarning] = useState('Please log in to post comments');
-
+    const [formattedDate, SetFormattedDate] = useState('')
     const buttonHandler = () => {
         SetCreateComment(current => !current)
     }
@@ -59,7 +59,8 @@ function ForumPage(props) {
 
         getComments();
         getInfo();
-    }, [id])
+        setPrompt('');
+    }, [id, prompt])
 
     useEffect(() => {
         if (results) {
@@ -79,12 +80,19 @@ function ForumPage(props) {
         }
     }, [results])
 
+    useEffect(() => {
+    if (info.date) {
+        SetFormattedDate(new Intl.DateTimeFormat("en-GB").format(new Date(info.date)));
+    }
+    }, [info.date]);
+
     const postComment = async () => {
         try {
             userapi.post(`/community/forum/comment/add/`, { comment_text:`${commentText}`, user_id:`${user.user_id}`, forum_id:`${id}` })
                 .then(result => {
                     try {
                         setPrompt('Succesfully added comment');
+                        SetCreateComment(false);
                     } catch (error) {
                         console.error(error)
                     }
@@ -94,7 +102,6 @@ function ForumPage(props) {
             console.error(error)
             setPrompt(`Couldn't add comment`)
         }
-
     }
 
     return (
@@ -106,7 +113,7 @@ function ForumPage(props) {
                             <h1>{info.title}</h1>
                         </div>
                         <p>{info.text}</p>
-                        <h5>Posted on {info.date} by User: {userInfo}</h5>
+                        <h5>Posted on {formattedDate} by User: {userInfo}</h5>
                     </div>
                     :
                     <></>
@@ -117,14 +124,15 @@ function ForumPage(props) {
                     <p>{warning}</p> :
                     <div>
                         <button onClick={buttonHandler}>Add Comment</button>  <br />
+                        <p>{prompt}</p>
                     </div>
+                    
             }
             {
                 createComment ?
                     <div>
                         <textarea id='text' rows="5" cols="80" value={commentText} onChange={(event) => setCommentText(event.target.value)} required></textarea><br />
                         <button onClick={() => postComment()}>Post</button>
-                        <p>{prompt}</p>
                     </div>
                     : <></>
             }
