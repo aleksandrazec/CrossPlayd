@@ -5,26 +5,11 @@ import './styles.css'
 import { useNavigate } from 'react-router';
 import userapi from "../../services/userapi";
 import GameTape from "./GameTape";
+import GamesPage from "./GamesPage";
 
 function HomePage(props) {
     const user = useContext(UserContext)
-    const navigate = useNavigate();
-
-    const [trendingGames, setTrendingGames] = useState()
     
-    useEffect(() => {
-        const getTrendingGames = async () => {
-            try {
-                const { data } = await userapi.get('/igdb/games/');
-                setTrendingGames(data);
-                console.log(data)
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message);
-            }
-        }
-        getTrendingGames()
-    }, [])
-
     const goToLogIn = async () => {
         try {
             navigate(`/login`)
@@ -50,16 +35,9 @@ function HomePage(props) {
                     :
                     <p></p>
                 }
-                <div className="trending-games">
-                    <h3>Trending games</h3>
-                    <hr></hr>
-                    {
-                        trendingGames ?
-                        <GameTape data={trendingGames}/>
-                        :
-                        <p></p>
-                    }
-                </div>
+                {
+                    <GamesPage/>
+                }
             </div>
         </div>
     )

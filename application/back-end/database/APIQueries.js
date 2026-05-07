@@ -1,6 +1,6 @@
 import api from "../config/api.js";
 
-export const getTrendingGames = async (body) => {
+export const getGames = async (body) => {
     const { data, error } = await api.post('/games/',
     body);
     console.log(data);

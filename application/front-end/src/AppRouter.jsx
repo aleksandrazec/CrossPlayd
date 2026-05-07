@@ -8,6 +8,8 @@ import RegisterSuccessPage from './components/profile/RegisterSuccessPage'
 import Profile from './components/profile/Profile'
 import ForumHome from "./components/forums/ForumHome"
 import ForumPage from "./components/forums/ForumPage"
+import GamesPage from './components/home-page/GamesPage';
+import AboutUs from './components/about-us/AboutUs';
 
 class AppRouter extends Component {
     render() {
@@ -22,6 +24,8 @@ class AppRouter extends Component {
                         <Route path="profile" element={<Profile />} />
                         <Route path="/community" element={<ForumHome />}/>
                         <Route path="/community/:id" element={<ForumPage />} />
+                        <Route path="/games" element={<GamesPage/>} />
+                        <Route path="/aboutus" element={<AboutUs/>} />
                     </Route>
                 </Routes>
             </BrowserRouter>

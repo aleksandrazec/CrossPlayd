@@ -42,3 +42,25 @@ button{
 .game-images{
     width: 100%;
 }
+.links th{
+    text-align: center;
+    background-color: #8D99AE;
+}
+.links a{
+    text-decoration: none;
+}
+.links a:link {
+  color: rgb(255, 255, 255);
+}
+
+.links a:visited {
+  color: rgb(0, 0, 0);
+}
+
+.links a:hover {
+  color: rgb(255, 255, 255);
+}
+
+.links a:active {
+  color: rgb(0, 0, 0);
+}
