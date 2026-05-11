@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Team patterns.md",
+                "file": "Sprint 3 Burndown chart.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Team patterns"
+              "title": "Sprint 3 Burndown chart"
             }
           }
         ]
@@ -186,10 +186,13 @@
   },
   "active": "117702c6e16be200",
   "lastOpenFiles": [
-    "CrossPlayd - Project Charter.md",
-    "Team patterns.md",
-    "Sprint 2.md",
+    "Sprint 3.md",
+    "Sprint 3 Burndown chart.md",
     "Sprint 2 Burndown chart.md",
+    "Add follower following.md",
+    "Sprint 2.md",
+    "Team patterns.md",
+    "CrossPlayd - Project Charter.md",
     "Sprint 1 Burndown chart.md",
     "Create Profile Log in functionalities.md",
     "Sprint 1.md",
