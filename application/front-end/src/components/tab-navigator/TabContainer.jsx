@@ -8,7 +8,8 @@ import logo from '../../assets/logo.png'
 function TabContainer({ children }) {
     const user = useContext(UserContext)
     const getTabs = () => {
-        if(user.role == 'User'){
+        console.log(user)
+        if(user.role !== 'Guest'){
             return [
                 {
                     text: 'Games',

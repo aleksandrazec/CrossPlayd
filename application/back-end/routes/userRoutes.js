@@ -19,6 +19,6 @@ router.put("/users/:id", modifyUser);
 router.delete("/users/:id", removeUser);
 router.post("/users/login", logIn);
 router.post("/users/logout", logOut);
-router.get("/users/session", session);
+router.post("/users/session", session);
 
 export default router;

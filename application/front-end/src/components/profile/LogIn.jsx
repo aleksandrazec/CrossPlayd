@@ -22,7 +22,8 @@ function LogIn(props) {
         if (user.role !== 'Guest') {
             navigate(`/profile`)
         }
-    }, [navigate, user])
+        console.log(user.role)
+    }, [user, navigate])
 
     const logIn = async () => {
         if (username && password) {

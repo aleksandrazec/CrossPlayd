@@ -19,6 +19,7 @@ function Register(props) {
             userapi.post(`/supabase/users/`, { email: email, password: password, username: username,})
                 .then(result => {
                     try {
+                        console.log(result)
                         navigate(`/registersuccess`)
                     } catch (error) {
                         console.error(error)

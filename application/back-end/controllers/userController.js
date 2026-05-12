@@ -87,9 +87,20 @@ export const logOut = async (req, res) => {
 
 export const session = async (req, res) => {
   try {
-    res.status(200).json(req.session)
+    console.log("session data: ")
+    console.log({
+        role: req.session.role,
+        user_id: req.session.user_id
+      })
+    res.status(200).json(
+      {
+        role: req.session.role,
+        user_id: req.session.user_id
+      }
+    )
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error)
+    res.status(500).json({ status: { success: false, msg: err } })
   }
 };
 
