@@ -33,8 +33,9 @@ function Profile(props) {
                 }
             }
             getUserInfo()
-        } else {
-            // navigate(`/login`)
+        } 
+        if (user.role==='Guest'){
+            navigate(`/login`)
         }
     }, [user, navigate])
 

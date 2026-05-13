@@ -19,8 +19,8 @@ function LogIn(props) {
         }
     }
     useEffect(() => {
-        if (user.role !== 'Guest') {
-            // navigate(`/profile`)
+        if (user.role === 'User') {
+            navigate(`/profile`)
         }
         console.log(user.role)
     }, [user, navigate])
