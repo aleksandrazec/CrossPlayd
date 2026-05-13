@@ -52,7 +52,7 @@ function GamesPage(props) {
                     <hr></hr>
                     {
                         trendingGames ?
-                        <GameTape data={trendingGames}/>
+                        <GameTape games={trendingGames}/>
                         :
                         <p></p>
                     }
@@ -63,7 +63,7 @@ function GamesPage(props) {
                     <hr></hr>
                     {
                         bestRatedGames ?
-                        <GameTape data={bestRatedGames}/>
+                        <GameTape games={bestRatedGames}/>
                         :
                         <p></p>
                     }
@@ -73,7 +73,7 @@ function GamesPage(props) {
                     <hr></hr>
                     {
                         nostalgicGames ?
-                        <GameTape data={nostalgicGames}/>
+                        <GameTape games={nostalgicGames}/>
                         :
                         <p></p>
                     }

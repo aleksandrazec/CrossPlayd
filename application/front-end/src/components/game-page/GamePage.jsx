@@ -140,7 +140,7 @@ function GamePage(props) {
                     <hr></hr>
                     {
                         similarGames ?
-                        <GameTape data={similarGames}/>
+                        <GameTape games={similarGames}/>
                         :
                         <p></p>
                     }

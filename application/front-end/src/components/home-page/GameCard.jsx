@@ -7,10 +7,11 @@ function GameCard(props) {
 
     const navigate = useNavigate()
     const [coverImage, setCoverImage] = useState()
-    const size='1080p'
+    const size = '1080p'
     const {
         id,
         cover,
+        cover_id,
         name,
         rating,
     } = props
@@ -19,10 +20,11 @@ function GameCard(props) {
     useEffect(() => {
         const getCoverImage = async () => {
             try {
-                const { data } = await userapi.post('/igdb/cover/',
-                    {coverID: `${cover}`});
-                setCoverImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${data[0].image_id}.jpg`);
-                console.log(data[0].image_id)
+                // const { data } = await userapi.post('/igdb/cover/',
+                //     {coverID: `${cover}`});
+                if (cover_id) {
+                    setCoverImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${cover_id}.jpg`);
+                }
             } catch (err) {
                 console.error(err.response?.data?.error || err.message);
             }

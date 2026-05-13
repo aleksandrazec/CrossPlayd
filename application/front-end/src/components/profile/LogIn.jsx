@@ -19,7 +19,7 @@ function LogIn(props) {
         }
     }
     useEffect(() => {
-        if (user.role !== 'Guest') {
+        if (user.role === 'User') {
             navigate(`/profile`)
         }
         console.log(user.role)
