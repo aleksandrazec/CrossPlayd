@@ -56,9 +56,9 @@ function Profile(props) {
         }
     }
 
-    const edit = async () => {
+    const goToLibrary = async () => {
         try {
-            navigate(`/editprofile`)
+            navigate(`/library`)
         } catch (error) {
             console.error(error)
         }
@@ -71,7 +71,7 @@ function Profile(props) {
             <p>Email: {userInfo.email}</p>
             <p>{userInfo.bio}</p>
             <div className="button-div">
-                <button className="buttons-list" onClick={() => edit()}>Edit profile</button><br />
+                <button className="buttons-list" onClick={() => goToLibrary()}>Library</button><br />
                 <button className="buttons-list" onClick={() => logout()}>Logout</button><br />
             </div>
         </div>

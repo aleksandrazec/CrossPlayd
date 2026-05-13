@@ -9,7 +9,7 @@ function TabContainer({ children }) {
     const user = useContext(UserContext)
     const getTabs = () => {
         console.log(user)
-        if(user.role !== 'Guest'){
+        if(user.role === 'User'){
             return [
                 {
                     text: 'Games',
@@ -28,7 +28,7 @@ function TabContainer({ children }) {
                     url: '/profile',
                 }
             ]
-        }else {
+        }else{
             return [
                 {
                     text: 'Games',

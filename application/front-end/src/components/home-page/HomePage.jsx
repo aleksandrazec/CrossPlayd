@@ -9,7 +9,8 @@ import GamesPage from "./GamesPage";
 
 function HomePage(props) {
     const user = useContext(UserContext)
-    
+    const navigate = useNavigate()
+
     const goToLogIn = async () => {
         try {
             navigate(`/login`)
