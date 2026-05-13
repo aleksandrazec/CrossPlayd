@@ -26,7 +26,6 @@ function GameTape(props) {
     //     }
     //     getCoverImages()
     // }, [])
-
     return (
         <div className="game-tape">
             {

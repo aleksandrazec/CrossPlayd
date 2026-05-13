@@ -175,3 +175,46 @@ export const fetchSimilarGames = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+export const fetchSelectedGames = async (req, res) => {
+  try {
+    const selectedGameID = req.body.id;
+    //console.log('similar games ' + selectedGameID[0]);
+    var similarGamesBody = `fields name, rating, cover, release_dates; limit 6; where id=${selectedGameID[0]}`
+    for (let index = 1; index < selectedGameID.length; index++) {
+      similarGamesBody+=` | id=${selectedGameID[index]}`
+    }
+    similarGamesBody+=";"
+    console.log(similarGamesBody)
+    const similarGames = await getGames(similarGamesBody);
+    for (let i = 0; i < similarGames.length; i++) {
+      let min_idx = i;
+      for (let j = i + 1; j < similarGames.length; j++) {
+        if (similarGames[j].id < similarGames[min_idx].id) {
+          min_idx = j;
+        }
+      }
+      let temp = similarGames[i];
+      similarGames[i] = similarGames[min_idx];
+      similarGames[min_idx] = temp;
+    }
+    const gameArray=[]
+    for (let index = 0; index < similarGames.length; index++) {
+      gameArray.push(similarGames[index].id)
+    }
+    console.log(gameArray)
+    var coverBody = `fields image_id; where game=${gameArray[0]}`
+    for (let index = 1; index < gameArray.length; index++) {
+      coverBody+=` | game=${gameArray[index]}`
+    }
+    coverBody += "; sort game asc;";
+    console.log(coverBody)
+    const covers = await getCover(coverBody);
+    console.log(covers)
+    for (let index = 0; index < covers.length; index++) {
+      similarGames[index].cover_id = covers[index].image_id
+    }
+    res.status(200).json(similarGames);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

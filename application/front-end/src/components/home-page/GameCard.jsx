@@ -43,7 +43,7 @@ function GameCard(props) {
 
     return (
         <div>
-            <div>
+            <div className='game-card'>
                 {
                     coverImage ?
                         <div >

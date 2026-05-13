@@ -8,12 +8,14 @@ import {
     fetchArtwork,
     fetchGenre,
     fetchSimilarGames,
+    fetchSelectedGames
 } from "../controllers/gameController.js";
 
 const router = express.Router();
 
 router.get("/games/trending", fetchTrendingGames);
 router.get("/games/bestrated", fetchBestRatedGames);
+router.post("/games/selected", fetchSelectedGames);
 router.get("/games/nostalgic", fetchNostalgicGames);
 router.post("/game", fetchGame);
 router.post("/cover", fetchCover);

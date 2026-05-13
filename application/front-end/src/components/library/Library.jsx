@@ -37,35 +37,36 @@ function Library(props) {
     }, [user])
 
     useEffect(() => {
-
+        //console.log(library);
         const getHunPercented = async () => {
             const hunPercentedGames = [];
-            for (const game in library) {
-                if (!Object.hasOwn(library, game)) library;
-                
-                const element = library[game];
-             
+            for (let i = 0; i < library.length; i++) {
+                // const game = library[i];
+                // console.log(game)
+                if (library[i].status === 1) {
+                    hunPercentedGames.push(library[i].game_id);
+                }
             }
 
-
-            Promise.all(library.map(async game => {
-                try {
-                    const { data } = await userapi.post('/igdb/game/', {id: game.game_id})
-                    libraryGames.push(data);
-                } catch (err) {
-                    console.error(err.response?.data?.error || err.message)
-                }
-            }))
-            console.log(libraryGames)
-            setGameLibrary(libraryGames);
+            // console.log(hunPercentedGames);
+            
+            try {
+                const { data } = await userapi.post('/igdb/games/selected/', {id: hunPercentedGames})
+                console.log(data);
+                setHunPercented(data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
         }
-
-        getHunPercented();
-        // getCompleted();
-        // getPlaying();
-        // getPaused();
-        // getDropped();
-        // getPlanToPlay();
+        
+        if(library!==undefined){
+            getHunPercented();
+            // getCompleted();
+            // getPlaying();
+            // getPaused();
+            // getDropped();
+            // getPlanToPlay();
+        }
     },[library])
 
     return(
@@ -75,7 +76,7 @@ function Library(props) {
                 <hr></hr>
                 {
                     hunPercented ?
-                    <GameTape data={hunPercented}/>
+                    <GameTape games={hunPercented}/>
                     :
                     <p></p>
                 }
@@ -85,7 +86,7 @@ function Library(props) {
                 <hr></hr>
                 {
                     completed ?
-                    <GameTape data={completed}/>
+                    <GameTape games={completed}/>
                     :
                     <p></p>
                 }
@@ -95,7 +96,7 @@ function Library(props) {
                 <hr></hr>
                 {
                     playing ?
-                    <GameTape data={playing}/>
+                    <GameTape games={playing}/>
                     :
                     <p></p>
                 }
@@ -105,7 +106,7 @@ function Library(props) {
                 <hr></hr>
                 {
                     paused ?
-                    <GameTape data={paused}/>
+                    <GameTape games={paused}/>
                     :
                     <p></p>
                 }
@@ -115,7 +116,7 @@ function Library(props) {
                 <hr></hr>
                 {
                     dropped ?
-                    <GameTape data={dropped}/>
+                    <GameTape games={dropped}/>
                     :
                     <p></p>
                 }
@@ -125,7 +126,7 @@ function Library(props) {
                 <hr></hr>
                 {
                     planToPlay ?
-                    <GameTape data={planToPlay}/>
+                    <GameTape games={planToPlay}/>
                     :
                     <p></p>
                 }
