@@ -14,9 +14,20 @@ export const fetchTrendingGames = async (req, res) => {
     var monthAgoUnix = currentUnix - +60 * 60 * 24 * 30;
     var trendingGamesBody = `fields name, rating, cover, release_dates; limit 6; where first_release_date > ${monthAgoUnix} ; sort rating desc;`
     const trendingGames = await getGames(trendingGamesBody);
-    var gameArray = [trendingGames[0].id, trendingGames[1].id, trendingGames[2].id, trendingGames[3].id, trendingGames[4].id, trendingGames[5].id];
-    const coverBody = `fields image_id; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]});`
-    console.log(coverBody);
+    for (let i = 0; i < trendingGames.length; i++) {
+      let min_idx = i;
+      for (let j = i + 1; j < trendingGames.length; j++) {
+        if (trendingGames[j].id < trendingGames[min_idx].id) {
+          min_idx = j;
+        }
+      }
+      let temp = trendingGames[i];
+      trendingGames[i] = trendingGames[min_idx];
+      trendingGames[min_idx] = temp;
+    }
+    const gameArray = [trendingGames[0].id, trendingGames[1].id, trendingGames[2].id, trendingGames[3].id, trendingGames[4].id, trendingGames[5].id];
+    const coverBody = `fields image_id, game; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]}); sort game asc;`
+    console.log(trendingGames);
     const covers = await getCover(coverBody);
     console.log(covers)
     for (let index = 0; index < covers.length; index++) {
@@ -32,8 +43,19 @@ export const fetchBestRatedGames = async (req, res) => {
   try {
     var bestRatedGamesBody = `fields name, rating, cover, release_dates; limit 6; sort rating desc;`
     const bestRatedGames = await getGames(bestRatedGamesBody);
+    for (let i = 0; i < bestRatedGames.length; i++) {
+      let min_idx = i;
+      for (let j = i + 1; j < bestRatedGames.length; j++) {
+        if (bestRatedGames[j].id < bestRatedGames[min_idx].id) {
+          min_idx = j;
+        }
+      }
+      let temp = bestRatedGames[i];
+      bestRatedGames[i] = bestRatedGames[min_idx];
+      bestRatedGames[min_idx] = temp;
+    }
     var gameArray = [bestRatedGames[0].id, bestRatedGames[1].id, bestRatedGames[2].id, bestRatedGames[3].id, bestRatedGames[4].id, bestRatedGames[5].id];
-    const coverBody = `fields image_id; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]});`
+    const coverBody = `fields image_id; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]}); sort game asc;`
     console.log(coverBody);
     const covers = await getCover(coverBody);
     console.log(covers)
@@ -49,8 +71,19 @@ export const fetchNostalgicGames = async (req, res) => {
   try {
     var nostalgicGamesBody = `fields name, rating, cover, release_dates; limit 6; where first_release_date < 946681200 ; sort rating desc;`
     const nostalgicGames = await getGames(nostalgicGamesBody);
+    for (let i = 0; i < nostalgicGames.length; i++) {
+      let min_idx = i;
+      for (let j = i + 1; j < nostalgicGames.length; j++) {
+        if (nostalgicGames[j].id < nostalgicGames[min_idx].id) {
+          min_idx = j;
+        }
+      }
+      let temp = nostalgicGames[i];
+      nostalgicGames[i] = nostalgicGames[min_idx];
+      nostalgicGames[min_idx] = temp;
+    }
     var gameArray = [nostalgicGames[0].id, nostalgicGames[1].id, nostalgicGames[2].id, nostalgicGames[3].id, nostalgicGames[4].id, nostalgicGames[5].id];
-    const coverBody = `fields image_id; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]});`
+    const coverBody = `fields image_id; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]}); sort game asc;`
     console.log(coverBody);
     const covers = await getCover(coverBody);
     console.log(covers)
@@ -117,6 +150,25 @@ export const fetchSimilarGames = async (req, res) => {
     console.log('similar games ' + similarGameID[0]);
     var similarGamesBody = `fields name, rating, cover, release_dates; limit 6; where id=${similarGameID[0]} | id=${similarGameID[1]} | id=${similarGameID[2]} | id=${similarGameID[3]} | id=${similarGameID[4]} | id=${similarGameID[5]} | id=${similarGameID[6]} | id=${similarGameID[7]} | id=${similarGameID[8]} | id=${similarGameID[9]};`
     const similarGames = await getGames(similarGamesBody);
+    for (let i = 0; i < similarGames.length; i++) {
+      let min_idx = i;
+      for (let j = i + 1; j < similarGames.length; j++) {
+        if (similarGames[j].id < similarGames[min_idx].id) {
+          min_idx = j;
+        }
+      }
+      let temp = similarGames[i];
+      similarGames[i] = similarGames[min_idx];
+      similarGames[min_idx] = temp;
+    }
+    var gameArray = [similarGames[0].id, similarGames[1].id, similarGames[2].id, similarGames[3].id, similarGames[4].id, similarGames[5].id];
+    const coverBody = `fields image_id; where game=(${gameArray[0]},${gameArray[1]},${gameArray[2]},${gameArray[3]},${gameArray[4]},${gameArray[5]}); sort game asc;`
+    console.log(coverBody);
+    const covers = await getCover(coverBody);
+    console.log(covers)
+    for (let index = 0; index < covers.length; index++) {
+      similarGames[index].cover_id = covers[index].image_id
+    }
     res.status(200).json(similarGames);
   } catch (error) {
     res.status(500).json({ error: error.message });
