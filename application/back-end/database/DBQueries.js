@@ -128,3 +128,13 @@ export const getReplies = async (reply_id)=>{
   if (error) throw new Error(error.message);
   return { data };
 }
+
+export const getLibrary = async (user_id) =>{
+  const {data, error} = await supabase
+    .from("GameLibrary")
+    .select("*")
+    .eq("user_id", user_id)
+    .order("date", { ascending: false })
+    if (error) throw new Error(error.message);
+    return { data };
+}

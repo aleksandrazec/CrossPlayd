@@ -7,7 +7,8 @@ import {
   removeUser,
   logIn,
   logOut,
-  session
+  session,
+  fetchLibrary
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.delete("/users/:id", removeUser);
 router.post("/users/login", logIn);
 router.post("/users/logout", logOut);
 router.post("/users/session", session);
+router.get("/users/library/:id", fetchLibrary);
 
 export default router;

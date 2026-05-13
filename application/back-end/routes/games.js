@@ -7,7 +7,7 @@ import {
     fetchGame,
     fetchArtwork,
     fetchGenre,
-    fetchSimilarGames
+    fetchSimilarGames,
 } from "../controllers/gameController.js";
 
 const router = express.Router();

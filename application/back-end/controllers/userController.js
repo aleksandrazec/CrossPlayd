@@ -5,7 +5,8 @@ import {
   getUserById,
   updateUser,
   deleteUser,
-  getUserByUsername
+  getUserByUsername,
+  getLibrary
 } from "../database/DBQueries.js";
 
 export const addUser = async (req, res) => {
@@ -124,6 +125,18 @@ export const removeUser = async (req, res) => {
     const result = await deleteUser(id);
     res.status(200).json(result);
   } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const fetchLibrary = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id)
+    const library = await getLibrary(id);
+    console.log(library);
+    res.status(200).json(library);
+  } catch (err) {
     res.status(500).json({ error: error.message });
   }
 };

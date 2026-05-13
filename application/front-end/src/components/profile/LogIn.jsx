@@ -20,7 +20,7 @@ function LogIn(props) {
     }
     useEffect(() => {
         if (user.role !== 'Guest') {
-            navigate(`/profile`)
+            // navigate(`/profile`)
         }
         console.log(user.role)
     }, [user, navigate])
@@ -36,7 +36,7 @@ function LogIn(props) {
                         })
                         console.log( result.data.role)
                         if (user.role !== 'Guest') {
-                            navigate(`/profile`)
+                            // navigate(`/profile`)
                         } else {
                             setText(`Something went wrong`)
                         }

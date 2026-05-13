@@ -11,6 +11,7 @@ import ForumHome from "./components/forums/ForumHome"
 import ForumPage from "./components/forums/ForumPage"
 import GamesPage from './components/home-page/GamesPage';
 import AboutUs from './components/about-us/AboutUs';
+import Library from './components/library/Library';
 
 class AppRouter extends Component {
     render() {
@@ -19,7 +20,7 @@ class AppRouter extends Component {
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index={true} element={<HomePage/>}/>
-                         <Route path='/gamepage/:id' element={<GamePage/>}/>
+                        <Route path='/gamepage/:id' element={<GamePage/>}/>
                         <Route path="login" element={<LogIn />} />
                         <Route path="register" element={<Register />} />
                         <Route path="registersuccess" element={<RegisterSuccessPage />} />
@@ -28,6 +29,7 @@ class AppRouter extends Component {
                         <Route path="/community/:id" element={<ForumPage />} />
                         <Route path="/games" element={<GamesPage/>} />
                         <Route path="/aboutus" element={<AboutUs/>} />
+                        <Route path="/library" element={<Library/>} />
                     </Route>
                 </Routes>
             </BrowserRouter>

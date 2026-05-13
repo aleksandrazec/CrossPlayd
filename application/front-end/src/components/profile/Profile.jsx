@@ -34,7 +34,7 @@ function Profile(props) {
             }
             getUserInfo()
         } else {
-            navigate(`/login`)
+            // navigate(`/login`)
         }
     }, [user, navigate])
 
