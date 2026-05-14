@@ -5,6 +5,7 @@ import userapi from "../../services/userapi";
 import './style.css'
 import TagsArray from "./TagsArray";
 import GameTape from "../home-page/GameTape";
+import ReviewBox from "./ReviewBox";
 
 function GamePage(props) {
     const user = useContext(UserContext);
@@ -144,6 +145,9 @@ function GamePage(props) {
                         :
                         <p></p>
                     }
+
+                    <ReviewBox/>
+                    
                 </div>
             </div>
         </div>

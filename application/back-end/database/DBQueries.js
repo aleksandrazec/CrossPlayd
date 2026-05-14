@@ -129,6 +129,17 @@ export const getReplies = async (reply_id)=>{
   return { data };
 }
 
+//Get reviews
+export const getReviews = async (review_id) => {
+  const {data, error} = await supabase
+  .from("GamePage")
+  .select("*")
+  .eq("review_id", review_id)
+  .order("data", {ascending : false})
+  if(error) throw new Error(error.message);
+  return { data };
+}
+
 export const getLibrary = async (user_id) =>{
   const {data, error} = await supabase
     .from("GameLibrary")
