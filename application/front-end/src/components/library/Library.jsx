@@ -58,14 +58,119 @@ function Library(props) {
                 console.error(err.response?.data?.error || err.message)
             }
         }
+
+        const getCompleted = async () => {
+            const completedGames = [];
+            for (let i = 0; i < library.length; i++) {
+                // const game = library[i];
+                // console.log(game)
+                if (library[i].status === 2) {
+                    completedGames.push(library[i].game_id);
+                }
+            }
+
+            // console.log(hunPercentedGames);
+            
+            try {
+                const { data } = await userapi.post('/igdb/games/selected/', {id: completedGames})
+                console.log(data);
+                setCompleted(data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
+
+        const getPlaying = async () => {
+            const playingGames = [];
+            for (let i = 0; i < library.length; i++) {
+                // const game = library[i];
+                // console.log(game)
+                if (library[i].status === 3) {
+                    playingGames.push(library[i].game_id);
+                }
+            }
+
+            // console.log(hunPercentedGames);
+            
+            try {
+                const { data } = await userapi.post('/igdb/games/selected/', {id: playingGames})
+                console.log(data);
+                setPlaying(data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
+
+        const getPaused = async () => {
+            const pausedGames = [];
+            for (let i = 0; i < library.length; i++) {
+                // const game = library[i];
+                // console.log(game)
+                if (library[i].status === 4) {
+                    pausedGames.push(library[i].game_id);
+                }
+            }
+
+            // console.log(hunPercentedGames);
+            
+            try {
+                const { data } = await userapi.post('/igdb/games/selected/', {id: pausedGames})
+                console.log(data);
+                setPaused(data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
+
+        const getDropped = async () => {
+            const droppedGames = [];
+            for (let i = 0; i < library.length; i++) {
+                // const game = library[i];
+                // console.log(game)
+                if (library[i].status === 5) {
+                    droppedGames.push(library[i].game_id);
+                }
+            }
+
+            // console.log(hunPercentedGames);
+            
+            try {
+                const { data } = await userapi.post('/igdb/games/selected/', {id: droppedGames})
+                console.log(data);
+                setDropped(data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
         
+        const getPlanToPlay = async () => {
+            const planToPlayGames = [];
+            for (let i = 0; i < library.length; i++) {
+                // const game = library[i];
+                // console.log(game)
+                if (library[i].status === 6) {
+                    planToPlayGames.push(library[i].game_id);
+                }
+            }
+
+            // console.log(hunPercentedGames);
+            
+            try {
+                const { data } = await userapi.post('/igdb/games/selected/', {id: planToPlayGames})
+                console.log(data);
+                setPlanToPlay(data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
+
         if(library!==undefined){
             getHunPercented();
-            // getCompleted();
-            // getPlaying();
-            // getPaused();
-            // getDropped();
-            // getPlanToPlay();
+            getCompleted();
+            getPlaying();
+            getPaused();
+            getDropped();
+            getPlanToPlay();
         }
     },[library])
 
