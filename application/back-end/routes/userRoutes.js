@@ -8,7 +8,8 @@ import {
   logIn,
   logOut,
   session,
-  fetchLibrary
+  fetchLibrary,
+  addGameToLibrary
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -22,5 +23,7 @@ router.post("/users/login", logIn);
 router.post("/users/logout", logOut);
 router.post("/users/session", session);
 router.get("/users/library/:id", fetchLibrary);
+router.post("/users/library/add", addGameToLibrary);
+
 
 export default router;

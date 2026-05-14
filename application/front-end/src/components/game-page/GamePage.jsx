@@ -26,6 +26,9 @@ function GamePage(props) {
     const [coverImage, setCoverImage] = useState();
     const [artworkImage, setArtworkImage] = useState();
     const [similarGames, setSimilarGames] = useState();
+    const [addToLibrary, setAddToLibrary] = useState(false);
+    const [status, setStatus] = useState(null);
+    const [rating, setRating] = useState(null);
 
     useEffect(() => {
         
@@ -91,6 +94,29 @@ function GamePage(props) {
         getSimilarGames();
     },[game.similar_games])
 
+    const buttonHandler = () => {
+        setAddToLibrary(current => !current)
+    }
+
+    const addToLibraryFunction = async () => {
+        if (status !== null && rating !== null) {
+            try {
+                const { data } = await userapi.post(`/supabase/users/library/add`, {
+                    game_id: id,
+                    user_id: user.user_id,
+                    status: status,
+                    rating: rating
+                });
+                console.log("Game added to library");
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        } else {
+            console.log("NOTHIIIINGGGGGG")
+        }
+        
+    }
+
     return (
         <div className="background-image">
             {
@@ -149,6 +175,43 @@ function GamePage(props) {
                     <ReviewBox/>
                     
                 </div>
+            </div>
+            <div>
+                <button onClick={buttonHandler}>Add to Library</button>
+            </div>
+            <div>
+                {
+                    addToLibrary === true ?
+                    <div>
+                        <h3>Status</h3>
+                        <select name="status" onChange={e => setStatus(e.target.value)}>
+                            <option value="1">100 Percented</option>
+                            <option value="2">Completed</option>
+                            <option value="3">Playing</option>
+                            <option value="4">Paused</option>
+                            <option value="5">Dropped</option>
+                            <option value="6">Plan to Play</option>
+                        </select>
+                        <h3>Rating</h3>
+                        <select name="rating" onChange={e => setRating(e.target.value)}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select> 
+                        <br></br>
+                        <br></br>
+                        <button type="submit" onClick={addToLibraryFunction}>Submit</button>
+                    </div>
+                    :
+                    <p></p>
+                }
             </div>
         </div>
     );

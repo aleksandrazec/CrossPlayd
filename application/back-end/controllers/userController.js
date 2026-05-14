@@ -6,7 +6,8 @@ import {
   updateUser,
   deleteUser,
   getUserByUsername,
-  getLibrary
+  getLibrary,
+  addToLibrary
 } from "../database/DBQueries.js";
 
 export const addUser = async (req, res) => {
@@ -100,7 +101,7 @@ export const session = async (req, res) => {
       }
     )
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     res.status(500).json({ status: { success: false, msg: err } })
   }
 };
@@ -132,11 +133,22 @@ export const removeUser = async (req, res) => {
 export const fetchLibrary = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id)
+    // console.log(id)
     const library = await getLibrary(id);
-    console.log(library);
+    // console.log(library);
     res.status(200).json(library);
   } catch (err) {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const addGameToLibrary = async (req,res) => {
+  try {
+      const data = req.body;
+      console.log(data);
+      const newGame = await addToLibrary(data);
+      res.status(201).json(newGame);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}

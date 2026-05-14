@@ -2,7 +2,7 @@ import supabase from "../config/supabaseClient.js";
 
 export const getUsers = async () => {
     const { data, error } = await supabase.from("User").select("*");
-    console.log(data);
+    // console.log(data);
     if (error) throw new Error(error.message);
     return data;
 };
@@ -13,13 +13,13 @@ export const getUserById = async (user_id) => {
       .select("*")
       .eq("user_id", user_id)
       .single();
-    console.log(data);
+    // console.log(data);
     if (error) throw new Error(error.message);
     return data;
 };
 
 export const createUser = async (user_data) => {
-    console.log([user_data]);
+    // console.log([user_data]);
     const { data, error } = await supabase
         .from("User")
         .insert([user_data])
@@ -55,7 +55,7 @@ export const getUserByUsername = async (username) => {
       .select("*")
       .eq("username", username)
       .single();
-    console.log(data);
+    // console.log(data);
     if (error) throw new Error(error.message);
     return data;
 };
@@ -148,4 +148,13 @@ export const getLibrary = async (user_id) =>{
     .order("date", { ascending: false })
     if (error) throw new Error(error.message);
     return { data };
+}
+
+export const addToLibrary = async (game_data) => {
+  const {data, error} = await supabase
+    .from("GameLibrary")
+    .insert([game_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
 }
