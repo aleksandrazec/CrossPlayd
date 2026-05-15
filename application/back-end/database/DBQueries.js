@@ -192,3 +192,12 @@ export const getReviewsForGame = async (id) => {
   if (error) throw new Error(error.message);
   return { data };
 }
+
+export const addGameReview = async (review_data) => {
+  const { data, error } = await supabase
+    .from("Review")
+    .insert([review_data])
+    .select()
+  if (error) throw new Error(error.message);
+  return { data };
+}

@@ -32,6 +32,9 @@ function GamePage(props) {
     const [rating, setRating] = useState(1);
     const [gameAlreadyAdded, setgameAlreadyAdded] = useState(false)
     const [editLibrary, setEditLibrary] = useState(false)
+    const [addReview, setAddReview] = useState(false)
+    const [reviewText, setReviewText] = useState('');
+    const [prompt, setPrompt] = useState('');
 
     useEffect(() => {
 
@@ -77,7 +80,8 @@ function GamePage(props) {
 
         getGame()
         getReviews()
-    }, [id, user.user_id])
+        setPrompt("")
+    }, [id, user.user_id, prompt])
 
     useEffect(() => {
 
@@ -145,6 +149,10 @@ function GamePage(props) {
         setEditLibrary(current => !current)
     }
 
+    const buttonHandlerReview = () => {
+        setAddReview(current => !current)
+    }
+
     const addToLibraryFunction = async () => {
         if (status !== null && rating !== null) {
             try {
@@ -182,6 +190,22 @@ function GamePage(props) {
             }
         } else {
             console.log("NOTHIIIINGGGGGG")
+        }
+    }
+
+    const postReview = async () => {
+        try {
+            userapi.post(`/reviews/game/add`, { review_text: `${reviewText}`, user_id: `${user.user_id}`, game_id: `${id}` })
+                .then(result => {
+                    try {
+                        setAddReview(false);
+                        setPrompt("Review added")
+                    } catch (error) {
+                        console.error(error)
+                    }
+                })
+        } catch (error) {
+            console.error(error)
         }
     }
 
@@ -336,9 +360,23 @@ function GamePage(props) {
                     <div className="reviews">
                         <h1>Reviews</h1>
                     </div>
-                    <div className="input">
-                        <button></button>
-                    </div>
+                    {
+                        user.role != 'User' ?
+                            <p></p> :
+                            <div>
+                                <button onClick={buttonHandlerReview}>Add Review</button>  <br />
+                                <p>{prompt}</p>
+                            </div>
+
+                    }
+                    {
+                        addReview ?
+                            <div>
+                                <textarea id='text' rows="5" cols="80" value={reviewText} onChange={(event) => setReviewText(event.target.value)} required></textarea><br />
+                                <button onClick={() => postReview()}>Post</button>
+                            </div>
+                            : <></>
+                    }
                     {
                         reviews ?
                             reviews.map(review =>

@@ -26,7 +26,6 @@
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding-top: 50px;
 }
 
 .game-cover2 {
@@ -35,7 +34,6 @@
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding-top: 20px;
 }
 
 .game-info {
