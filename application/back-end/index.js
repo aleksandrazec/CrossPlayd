@@ -5,6 +5,7 @@ import session from 'express-session'
 import userRoutes from "./routes/userRoutes.js";
 import games from "./routes/games.js"
 import forums from "./routes/forums.js"
+import reviews from "./routes/reviews.js"
 
 env.config();
 const app = express();
@@ -36,6 +37,7 @@ app.get("/", (req, res) => {
 app.use("/supabase", userRoutes);
 app.use("/igdb", games);
 app.use("/community", forums);
+app.use("/reviews", reviews);
 
 app.listen(process.env.PORT || port, ()=>{
     console.log(`Server is running on port: ${process.env.PORT || port}`)

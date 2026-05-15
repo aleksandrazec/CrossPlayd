@@ -26,9 +26,9 @@ function Library(props) {
                         setLibrary(result.data.data);
                         // console.log(result.data.data);
                     })
-                    .catch(err => console.error(err))
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+                    .catch(error => console.error(error))
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         } 
         if(user.user_id!==undefined){
@@ -49,13 +49,19 @@ function Library(props) {
             }
 
             // console.log(hunPercentedGames);
-            
+            if(hunPercentedGames.length === 0){
+                setPlaying([]);
+                return;
+            }
+
             try {
                 const { data } = await userapi.post('/igdb/games/selected/', {id: hunPercentedGames})
-                console.log(data);
-                setHunPercented(data);
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+                if(data.length>0){
+                    console.log(data);
+                    setHunPercented(data);
+                }
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         }
 
@@ -70,13 +76,19 @@ function Library(props) {
             }
 
             // console.log(hunPercentedGames);
-            
+            if(completedGames.length === 0){
+                setPlaying([]);
+                return;
+            }
+
             try {
                 const { data } = await userapi.post('/igdb/games/selected/', {id: completedGames})
-                console.log(data);
-                setCompleted(data);
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+                if(data.length>0){
+                    console.log(data);
+                    setCompleted(data);
+                }
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         }
 
@@ -91,13 +103,19 @@ function Library(props) {
             }
 
             // console.log(hunPercentedGames);
-            
+            if(playingGames.length === 0){
+                setPlaying([]);
+                return;
+            }
+
             try {
                 const { data } = await userapi.post('/igdb/games/selected/', {id: playingGames})
-                console.log(data);
-                setPlaying(data);
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+                if(data.length > 0){
+                    console.log(data);
+                    setPlaying(data);
+                }
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         }
 
@@ -112,13 +130,19 @@ function Library(props) {
             }
 
             // console.log(hunPercentedGames);
-            
+            if(pausedGames.length === 0){
+                setPlaying([]);
+                return;
+            }
+
             try {
                 const { data } = await userapi.post('/igdb/games/selected/', {id: pausedGames})
-                console.log(data);
-                setPaused(data);
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+                if(data.length>0){
+                    console.log(data);
+                    setPaused(data);
+                }
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         }
 
@@ -133,13 +157,20 @@ function Library(props) {
             }
 
             // console.log(hunPercentedGames);
-            
+            if(droppedGames.length === 0){
+                setPlaying([]);
+                return;
+            }
+
+
             try {
                 const { data } = await userapi.post('/igdb/games/selected/', {id: droppedGames})
-                console.log(data);
-                setDropped(data);
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+                if(data.length > 0){
+                    console.log(data);
+                    setDropped(data);
+                }
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         }
         
@@ -154,13 +185,17 @@ function Library(props) {
             }
 
             // console.log(hunPercentedGames);
-            
+            if(planToPlayGames.length === 0){
+                setPlaying([]);
+                return;
+            }
+
             try {
                 const { data } = await userapi.post('/igdb/games/selected/', {id: planToPlayGames})
                 console.log(data);
                 setPlanToPlay(data);
-            } catch (err) {
-                console.error(err.response?.data?.error || err.message)
+            } catch (error) {
+                console.error(error.response?.data?.error || error.message)
             }
         }
 
@@ -181,7 +216,9 @@ function Library(props) {
                 <hr></hr>
                 {
                     hunPercented ?
-                    <GameTape games={hunPercented}/>
+                    <div className="game-cover2">
+                        <GameTape games={hunPercented}/>
+                    </div>
                     :
                     <p></p>
                 }
@@ -191,7 +228,9 @@ function Library(props) {
                 <hr></hr>
                 {
                     completed ?
-                    <GameTape games={completed}/>
+                    <div className="game-cover2">
+                        <GameTape games={completed}/>
+                    </div>
                     :
                     <p></p>
                 }
@@ -201,7 +240,9 @@ function Library(props) {
                 <hr></hr>
                 {
                     playing ?
-                    <GameTape games={playing}/>
+                    <div className="game-cover2">
+                        <GameTape games={playing}/>
+                    </div>
                     :
                     <p></p>
                 }
@@ -211,7 +252,9 @@ function Library(props) {
                 <hr></hr>
                 {
                     paused ?
-                    <GameTape games={paused}/>
+                    <div className="game-cover2">
+                        <GameTape games={paused}/>
+                    </div>
                     :
                     <p></p>
                 }
@@ -221,7 +264,9 @@ function Library(props) {
                 <hr></hr>
                 {
                     dropped ?
-                    <GameTape games={dropped}/>
+                    <div className="game-cover2">
+                        <GameTape games={dropped}/>
+                    </div>
                     :
                     <p></p>
                 }
@@ -231,7 +276,9 @@ function Library(props) {
                 <hr></hr>
                 {
                     planToPlay ?
+                    <div className="game-cover2">
                     <GameTape games={planToPlay}/>
+                    </div>
                     :
                     <p></p>
                 }

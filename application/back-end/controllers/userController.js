@@ -7,7 +7,9 @@ import {
   deleteUser,
   getUserByUsername,
   getLibrary,
-  addToLibrary
+  addToLibrary,
+  getGameInLibrary,
+  editLibrary
 } from "../database/DBQueries.js";
 
 export const addUser = async (req, res) => {
@@ -137,7 +139,7 @@ export const fetchLibrary = async (req, res) => {
     const library = await getLibrary(id);
     // console.log(library);
     res.status(200).json(library);
-  } catch (err) {
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -145,10 +147,32 @@ export const fetchLibrary = async (req, res) => {
 export const addGameToLibrary = async (req,res) => {
   try {
       const data = req.body;
-      console.log(data);
+      //console.log(data);
       const newGame = await addToLibrary(data);
       res.status(201).json(newGame);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+}
+
+export const fetchGameInLibrary = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {game_id} = req.body;
+    const library = await getGameInLibrary(game_id, id);
+    res.status(200).json(library);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export const editGameLibrary = async (req,res) => {
+  try {;
+    const { game_id, user_id, status, rating } = req.body;
+    const library = await editLibrary(game_id, user_id, rating, status);
+    console.log(library)
+    res.status(200).json(library);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 }

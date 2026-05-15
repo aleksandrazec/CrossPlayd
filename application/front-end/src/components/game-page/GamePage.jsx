@@ -12,62 +12,103 @@ function GamePage(props) {
     const navigate = useNavigate();
 
     const { id } = useParams();
-    const size='1080p'
+    const size = '1080p'
     const size_background = ''
 
     const [game, setGame] = useState({
-        cover: 0 ,
+        cover: 0,
         genres: undefined,
         name: '',
         similar_games: undefined,
         summary: ''
     });
 
+    const [reviews, setReviews] = useState()
     const [coverImage, setCoverImage] = useState();
     const [artworkImage, setArtworkImage] = useState();
     const [similarGames, setSimilarGames] = useState();
     const [addToLibrary, setAddToLibrary] = useState(false);
-    const [status, setStatus] = useState(null);
-    const [rating, setRating] = useState(null);
+    const [status, setStatus] = useState(1);
+    const [rating, setRating] = useState(1);
+    const [gameAlreadyAdded, setgameAlreadyAdded] = useState(false)
+    const [editLibrary, setEditLibrary] = useState(false)
 
     useEffect(() => {
-        
+
         const getGame = async () => {
             try {
-                const { data } = await userapi.post('/igdb/game/', {id: id});
+                const { data } = await userapi.post('/igdb/game/', { id: id });
                 setGame(data[0]);
                 // console.log(data)
             } catch (err) {
                 console.error(err.response?.data?.error || err.message)
             }
         }
-        
-        getGame();
-    }, [id])
 
- useEffect(() => {
-
-        const getCover = async () => {
+        const isGameInLibrary = async () => {
             try {
-                const { data } = await userapi.post('/igdb/cover/', {coverID: `${game.cover}`});
-                setCoverImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${data[0].image_id}.jpg`);
+                const { data } = await userapi.post(`/supabase/users/library/game/${user.user_id}`, { game_id: id });
+                if (data && data.data.length != 0) {
+                    console.log(data)
+                    setgameAlreadyAdded(true)
+                } else {
+                    console.log("NOOOOOOOOOOOO")
+                    setgameAlreadyAdded(false);
+                }
             } catch (err) {
                 console.error(err.response?.data?.error || err.message)
             }
-        } 
-        
+        }
+
+        const getReviews = async () => {
+            try {
+                const { data } = await userapi.get(`reviews/game/${id}`);
+                setReviews(data.data);
+                console.log(data.data);
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
+
+        if (user.role == 'User') {
+            console.log(user.user_id)
+            isGameInLibrary()
+        }
+
+        getGame()
+        getReviews()
+    }, [id, user.user_id])
+
+    useEffect(() => {
+
+        const getCover = async () => {
+            try {
+                const { data } = await userapi.post('/igdb/cover/', { coverID: `${game.cover}` });
+                if (data.length > 0) {
+                    setCoverImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${data[0].image_id}.jpg`);
+                }
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        }
+
         console.log(game.similar_games)
         // console.log(game.genres);
-        getCover(); 
+        getCover();
 
     }, [game.cover])
 
-     useEffect(() => {
+    useEffect(() => {
 
         const getArtworkImage = async () => {
             try {
-                const { data } = await userapi.post('/igdb/artwork/', {game: id});
-                setArtworkImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${data[0].image_id}.jpg`);
+                const { data } = await userapi.post('/igdb/artwork/', { game: id });
+                if (data.length > 0) {
+                    setArtworkImage(`https://images.igdb.com/igdb/image/upload/t_${size}/${data[0].image_id}.jpg`);
+                }
+                else {
+                    setArtworkImage(null)
+                }
                 // console.log(data)
             } catch (err) {
                 console.error(err.response?.data?.error || err.message)
@@ -81,21 +122,27 @@ function GamePage(props) {
     useEffect(() => {
         const getSimilarGames = async () => {
             try {
-                const { data } = await userapi.post('/igdb/similar/', {id: game.similar_games});
-                setSimilarGames(data);
+                const { data } = await userapi.post('/igdb/similar/', { id: game.similar_games });
+                if (data.length > 0) {
+                    setSimilarGames(data);
+                }
                 console.log(data)
             } catch (err) {
                 console.error(err.response?.data?.error || err.message)
             }
         }
         console.log(game.similar_games)
-        game.similar_games===undefined ?
-        console.log("its undefined") :
-        getSimilarGames();
-    },[game.similar_games])
+        game.similar_games === undefined ?
+            console.log("its undefined") :
+            getSimilarGames();
+    }, [game.similar_games])
 
     const buttonHandler = () => {
         setAddToLibrary(current => !current)
+    }
+
+    const buttonHandler2 = () => {
+        setEditLibrary(current => !current)
     }
 
     const addToLibraryFunction = async () => {
@@ -108,58 +155,79 @@ function GamePage(props) {
                     rating: rating
                 });
                 console.log("Game added to library");
+                setAddToLibrary(false)
+                setgameAlreadyAdded(true)
             } catch (err) {
                 console.error(err.response?.data?.error || err.message)
             }
         } else {
             console.log("NOTHIIIINGGGGGG")
         }
-        
+    }
+
+    const editLibraryFunction = async () => {
+        console.log(status + "  " + rating)
+        if (status !== null && rating !== null) {
+            try {
+                const { data } = await userapi.post(`/supabase/users/library/edit`, {
+                    game_id: id,
+                    user_id: user.user_id,
+                    status: status,
+                    rating: rating
+                });
+                console.log("Game edited");
+                setEditLibrary(false)
+            } catch (err) {
+                console.error(err.response?.data?.error || err.message)
+            }
+        } else {
+            console.log("NOTHIIIINGGGGGG")
+        }
     }
 
     return (
         <div className="background-image">
             {
-                artworkImage !== ''?
-                <div>
-                    <img className="game-background" src={artworkImage}></img>
-                </div>
-                :
-                <p>Loading</p>
+                artworkImage !== '' ?
+                    <div>
+                        <img className="game-background" src={artworkImage}></img>
+                    </div>
+                    :
+                    <p>Loading</p>
             }
             <div className="panel">{
                 game.name !== '' ?
-                <div>
-                    <img className="game-cover" src={coverImage}></img>
-                </div>
-                :
-                <p>Loading</p>
-                }
-                <div className="game-introText">
-                    {
-                    game.name !== '' ?
-                    <div className="game-title">
-                        <h1>{game.name}</h1>
+                    <div>
+                        <img className="game-cover" src={coverImage}></img>
                     </div>
                     :
                     <p>Loading</p>
+            }
+                <div className="game-introText">
+                    {
+                        game.name !== '' ?
+                            <div className="game-title">
+                                <h1>{game.name}</h1>
+                            </div>
+                            :
+                            <p>Loading</p>
                     }
                     <div className="genre-tags">
-                        <p>Genre: </p> 
+                        <p>Genres: </p>
                         {
-                        game.genres ?
-                        <TagsArray data={game.genres}/>
-                        :
-                        <p></p>
+                            game.genres ?
+                                <TagsArray data={game.genres} />
+                                :
+                                <p></p>
                         }
                     </div>
                     {
-                    game.summary !== '' ?
-                    <div className="game-summary">
-                        <p>{game.summary}</p>
-                    </div>
-                    :
-                    <p>Loading</p>
+                        game.summary !== '' ?
+                            <div className="game-summary">
+                                <p>{game.summary}</p>
+                            </div>
+                            :
+                            <p>Loading</p>
                     }
                 </div>
                 <div className="related-games">
@@ -167,51 +235,118 @@ function GamePage(props) {
                     <hr></hr>
                     {
                         similarGames ?
-                        <GameTape games={similarGames}/>
-                        :
-                        <p></p>
+                            <GameTape games={similarGames} />
+                            :
+                            <p></p>
                     }
 
-                    <ReviewBox/>
-                    
+
                 </div>
             </div>
-            <div>
-                <button onClick={buttonHandler}>Add to Library</button>
-            </div>
-            <div>
+            <div className="allinputs">
                 {
-                    addToLibrary === true ?
-                    <div>
-                        <h3>Status</h3>
-                        <select name="status" onChange={e => setStatus(e.target.value)}>
-                            <option value="1">100 Percented</option>
-                            <option value="2">Completed</option>
-                            <option value="3">Playing</option>
-                            <option value="4">Paused</option>
-                            <option value="5">Dropped</option>
-                            <option value="6">Plan to Play</option>
-                        </select>
-                        <h3>Rating</h3>
-                        <select name="rating" onChange={e => setRating(e.target.value)}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select> 
-                        <br></br>
-                        <br></br>
-                        <button type="submit" onClick={addToLibraryFunction}>Submit</button>
-                    </div>
-                    :
-                    <p></p>
+                    !gameAlreadyAdded && user.role == 'User' ?
+                        <div className="input">
+                            <div>
+                                <button onClick={buttonHandler} className="button">Add to Library</button>
+                            </div>
+                            <div>
+                                {
+                                    addToLibrary === true ?
+                                        <div>
+                                            <h3>Status</h3>
+                                            <select name="status" onChange={e => setStatus(e.target.value)}>
+                                                <option value="1">100 Percented</option>
+                                                <option value="2">Completed</option>
+                                                <option value="3">Playing</option>
+                                                <option value="4">Paused</option>
+                                                <option value="5">Dropped</option>
+                                                <option value="6">Plan to Play</option>
+                                            </select>
+                                            <h3>Rating</h3>
+                                            <select name="rating" onChange={e => setRating(e.target.value)}>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                            <br></br>
+                                            <br></br>
+                                            <button type="submit" onClick={addToLibraryFunction} className="button">Submit</button>
+                                        </div>
+                                        :
+                                        <p></p>
+                                }
+                            </div>
+                        </div>
+                        :
+                        <p></p>
                 }
+                {
+                    gameAlreadyAdded && user.role == 'User' ?
+                        <div className="input">
+                            <div>
+                                <button onClick={buttonHandler2} className="button">Edit Library</button>
+                            </div>
+                            <div>
+                                {
+                                    editLibrary === true ?
+                                        <div>
+                                            <h3>Status</h3>
+                                            <select name="status" onChange={e => setStatus(e.target.value)}>
+                                                <option value="1">100 Percented</option>
+                                                <option value="2">Completed</option>
+                                                <option value="3">Playing</option>
+                                                <option value="4">Paused</option>
+                                                <option value="5">Dropped</option>
+                                                <option value="6">Plan to Play</option>
+                                            </select>
+                                            <h3>Rating</h3>
+                                            <select name="rating" onChange={e => setRating(e.target.value)}>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                            <br></br>
+                                            <br></br>
+                                            <button type="submit" onClick={editLibraryFunction} className="button">Submit</button>
+                                        </div>
+                                        :
+                                        <p></p>
+                                }
+                            </div>
+                        </div>
+                        :
+                        <p></p>
+                }
+                <div>
+                    <div className="reviews">
+                        <h1>Reviews</h1>
+                    </div>
+                    <div className="input">
+                        <button></button>
+                    </div>
+                    {
+                        reviews ?
+                            reviews.map(review =>
+                                <ReviewBox id={review.review_id} key={review.review_id} date={review.date} user_id={review.user_id} review_text={review.review_text} />)
+                            :
+                            <></>
+                    }
+                </div>
             </div>
         </div>
     );
