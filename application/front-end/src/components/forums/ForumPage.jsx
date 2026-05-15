@@ -105,10 +105,10 @@ function ForumPage(props) {
     }
 
     return (
-        <div>
+        <div className='forum-page'>
             {
                 info ?
-                    <div>
+                    <div className='forum-post'>
                         <div>
                             <h1>{info.title}</h1>
                         </div>
@@ -118,7 +118,6 @@ function ForumPage(props) {
                     :
                     <></>
             }
-
             {
                 user.role != 'User' ?
                     <p>{warning}</p> :
@@ -136,7 +135,7 @@ function ForumPage(props) {
                     </div>
                     : <></>
             }
-            <div>
+            <div className='comments-section'>
                 {
                     comments && comments.length > 0 ?
                         <div>

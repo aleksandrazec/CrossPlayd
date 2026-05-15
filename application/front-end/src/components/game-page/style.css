@@ -21,20 +21,13 @@
 
 
 .game-cover {
-    width: clamp(180px, 20vw, 320px);
-    height: auto;
+    width: clamp(200px, 25vw, 320px);
+    height: 400px;
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.game-cover2 {
-    width: clamp(100px, 15vw, 220px);
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 .game-info {
     flex: 1;
@@ -198,4 +191,107 @@ h1 {
 
 button:hover {
     background-color: rgb(60, 60, 60);
+}
+
+/* GameTape container - exactly 6 columns */
+.game-tape {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 equal columns */
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* GameCard takes full width of its grid cell */
+.game-card {
+    width: 100%;
+}
+
+/* Game images fill the card */
+.game-images {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2/3; /* Maintains game cover proportion */
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Make the parent container full width */
+.parent {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.child {
+    width: 100%;
+}
+
+.trending-games {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.game-images:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .game-card {
+        width: 150px;
+    }
+    
+    .game-images {
+        width: 150px;
+        height: 210px;
+    }
+}
+
+
+.forums-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.forums-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.forums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.forum-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.forum-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.forum-post {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section {
+    margin-top: 2rem;
 }

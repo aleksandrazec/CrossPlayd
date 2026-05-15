@@ -43,9 +43,9 @@ function ForumCard(props) {
     }, [])
 
     return (
-        <div>
+        <div className='forum-card' onClick={()=>goToForum()}>  
             <div>
-                <h2 onClick={()=>goToForum()}>{title}</h2>
+                <h2>{title}</h2>
             </div>
             <p>{text}</p>
             <p>Posted on {formattedDate} by {user}</p>

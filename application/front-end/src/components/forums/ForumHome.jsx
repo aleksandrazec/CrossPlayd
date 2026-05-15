@@ -58,8 +58,10 @@ function ForumsHome(props) {
 
 
     return (
-        <div>
-            <h1>Forums</h1>
+        <div className='forums-container'>
+            <div className='forums-header'>
+                <h1>Forums</h1>
+            </div>
             {
                 user.role != 'User' ?
                 <p></p> :
@@ -70,6 +72,7 @@ function ForumsHome(props) {
             {
                 createForum ?
                     <div>
+                        <br />
                         <form onSubmit={() => SubmitForum()} method="POST">
                             <label>Title:</label> <input type='text' id='title' required value={title} onChange={(event) => setTitle(event.target.value)}></input><br /> <br />
                             <textarea id='text' rows="10" cols="80" value={text} onChange={(event) => setText(event.target.value)} required></textarea><br />
@@ -79,13 +82,15 @@ function ForumsHome(props) {
                     </div>
                     : <></>
             }
-            {
-                forums ?
-                    forums.map(forum =>
-                        <ForumCard id={forum.forum_id} key={forum.forum_id} date={forum.date} text={forum.text} user_id={forum.user_id} title={forum.title} />)
-                    :
-                    <></>
-            }
+            <div className="forums-grid">
+                {   
+                    forums && forums.length > 0 ?
+                        forums.map(forum =>
+                            <ForumCard id={forum.forum_id} key={forum.forum_id} date={forum.date} text={forum.text} user_id={forum.user_id} title={forum.title} />)
+                        :
+                        <></>
+                }
+            </div>
         </div>
     )
 }

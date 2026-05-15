@@ -35,6 +35,7 @@ function GamePage(props) {
     const [addReview, setAddReview] = useState(false)
     const [reviewText, setReviewText] = useState('');
     const [prompt, setPrompt] = useState('');
+    const [userRating, setUserRating] = useState('')
 
     useEffect(() => {
 
@@ -53,6 +54,7 @@ function GamePage(props) {
                 const { data } = await userapi.post(`/supabase/users/library/game/${user.user_id}`, { game_id: id });
                 if (data && data.data.length != 0) {
                     console.log(data)
+                    setUserRating(data.data[0].rating)
                     setgameAlreadyAdded(true)
                 } else {
                     console.log("NOOOOOOOOOOOO")
@@ -163,6 +165,7 @@ function GamePage(props) {
                     rating: rating
                 });
                 console.log("Game added to library");
+                setUserRating(rating)
                 setAddToLibrary(false)
                 setgameAlreadyAdded(true)
             } catch (err) {
@@ -183,6 +186,7 @@ function GamePage(props) {
                     status: status,
                     rating: rating
                 });
+                setUserRating(rating)
                 console.log("Game edited");
                 setEditLibrary(false)
             } catch (err) {
@@ -266,6 +270,15 @@ function GamePage(props) {
 
 
                 </div>
+            </div>
+            <div>
+                {
+                    gameAlreadyAdded && user.role == 'User' ?
+                    <div style={{margin:"auto", textAlign:"center"}}>
+                        <h2>Your Rating: {userRating}</h2>
+                    </div>
+                    :<></>
+                }
             </div>
             <div className="allinputs">
                 {
@@ -378,11 +391,13 @@ function GamePage(props) {
                             : <></>
                     }
                     {
-                        reviews ?
+                        reviews && reviews.length>0?
                             reviews.map(review =>
                                 <ReviewBox id={review.review_id} key={review.review_id} date={review.date} user_id={review.user_id} review_text={review.review_text} />)
                             :
-                            <></>
+                            <>
+                                <h2>No Reviews yet</h2>
+                            </>
                     }
                 </div>
             </div>
