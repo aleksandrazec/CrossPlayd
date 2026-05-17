@@ -6,10 +6,6 @@ kanban-plugin: board
 
 ## TO DO
 
-- [ ] Make session data consistent #intermediate @{2026-05-16}
-- [ ] Add library functionality #difficult @{2026-05-16}
-- [ ] Add review/star functionality #intermediate @{2026-05-16}
-- [ ] Add follower following #intermediate @{2026-05-16}
 
 
 ## IN PROGRESS
@@ -23,6 +19,10 @@ kanban-plugin: board
 ## DONE
 
 **Complete**
+- [x] Make session data consistent #intermediate @{2026-05-16}
+- [x] Add review/star functionality #intermediate @{2026-05-16}
+- [x] Add library functionality #difficult @{2026-05-16}
+- [x] ~~Add follower following~~ #intermediate @{2026-05-16}
 
 
 

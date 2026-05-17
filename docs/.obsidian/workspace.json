@@ -11,21 +11,14 @@
             "id": "117702c6e16be200",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Sprint 3.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "Sprint 3 Burndown chart.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "Sprint 3"
+              "icon": "lucide-file",
+              "title": "Sprint 3 Burndown chart"
             }
           }
         ]
@@ -193,19 +186,19 @@
   },
   "active": "117702c6e16be200",
   "lastOpenFiles": [
-    "Sprint 3 Burndown chart.md",
     "Sprint 3.md",
+    "Sprint 3 Burndown chart.md",
+    "CrossPlayd - Project Charter.md",
+    "Team patterns.md",
+    "Usability Testing Plan.md",
+    "Table of contents.base",
+    "Sprint 2.md",
+    "Sprint 1.md",
+    "Sprint 1 Burndown chart.md",
     "Sprint 2 Burndown chart.md",
     "Add follower following.md",
-    "Sprint 2.md",
-    "Team patterns.md",
-    "CrossPlayd - Project Charter.md",
-    "Sprint 1 Burndown chart.md",
     "Create Profile Log in functionalities.md",
-    "Sprint 1.md",
-    "Table of contents.base",
     "Sprint 0 Information.md",
-    "Usability Testing Plan.md",
     "Hypothesis Testing.md",
     "Project stakeholders.md",
     "Create branching strategy.md",
