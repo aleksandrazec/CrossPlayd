@@ -9,7 +9,7 @@ function AboutUs(props) {
                     <img className="image" src={logo} alt='Logo'></img>
                 </div>
                 <div className="header">
-                    <h1 style={{ textAlign: "center" }}>We're not gamers because we don't have lives. It's because we choose to have many...</h1>
+                    <h1 style={{ textAlign: "center", fontSize: "40px" }}>We're not gamers because we don't have lives. It's because we choose to have many...</h1>
                 </div>
                 <div className="trending-games">
                     <h3>Our mission</h3>
@@ -27,6 +27,9 @@ function AboutUs(props) {
                             </tr>
                         </tbody>
                     </table>
+                    <h3>Special Thanks</h3>
+                    <hr></hr>
+                    <p style={{ textJustify: "true" }}>We would like to extend a special thanks to IGDB.com for giving us persmission to use their API.</p>
                     <h3>Important links:</h3>
                     <hr></hr>
                     <p>Our GitHub containing documentation, the code as well as information about the tools used, can be found <a href="https://github.com/aleksandrazec/CrossPlayd/">here.</a></p>
